@@ -1,0 +1,84 @@
+/* Use the Fredoka Variable font from Google */
+* {
+    font-family: 'Fredoka', sans-serif;
+}
+h1{
+    font-weight: 500;
+}
+h2{
+    font-weight: 400;
+}
+p, a{
+    font-weight: 300;
+}
+/* ---------- Header Container ---------- */
+.header-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #242e7a;
+}
+
+/* ---------- Logo Styling ---------- */
+.logo img {
+  height: 50px;
+}
+
+/* ---------- Header Right Container for Hamburger and Cart Icon ---------- */
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+/* ---------- Hamburger Menu Button ---------- */
+.hamburger-menu {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 10px;
+  font-size: 24px; /* Used when showing 'X';*/
+  color: #a6f41d; /* Used when showing 'X';*/
+}
+.hamburger-menu .bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: #a6f41d;
+  margin: 4px 0;
+  transition: all 0.3s;
+}
+
+/* ---------- Cart Icon Container ---------- */
+.cart-icon-container {
+  padding: 0 10px;
+}
+.cart-icon-container img {
+  width: 30px;
+  height: auto;
+}
+
+/* ---------- Navigation Menu Dropdown ---------- */
+.nav-links {
+  display: none; /* Hidden by default */
+  background-color: #fff;
+  width: 100%;
+  position: absolute;
+  top: 70px; 
+  left: 0;
+  z-index: 10;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.nav-links ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-links ul li {
+  padding: 10px;
+  text-align: left;
+  cursor: pointer;
+  color: #000;
+  margin-right: 50px;
+}

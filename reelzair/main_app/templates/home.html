@@ -1,4 +1,9 @@
-{% extends "base.html" %} {% block content %}
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{% static 'css/home.css' %}"
+/>
+{% endblock %} {% block content %}
 <!-- Hero Section -->
 <section
   class="hero"
@@ -16,31 +21,7 @@
   </p>
   <!-- Call to Action Buttons -->
   <div class="cta-buttons" style="margin-top: 2rem">
-    <a
-      href="{% url 'product-index' %}"
-      class="btn"
-      style="
-        margin-right: 1rem;
-        background: #7ed321;
-        padding: 1rem 2rem;
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-      "
-      >Browse Products</a
-    >
-    <a
-      href="{% url 'about' %}"
-      class="btn"
-      style="
-        background: #fff;
-        padding: 1rem 2rem;
-        color: #2c5aa0;
-        text-decoration: none;
-        border-radius: 5px;
-      "
-      >Learn More</a
-    >
+    
   </div>
 </section>
 
