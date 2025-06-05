@@ -1,39 +1,70 @@
 {% extends 'base.html' %} {% load static %} {% block head %}
-<link
-  rel="stylesheet"
-  href="{% static 'css/home.css' %}"
-/>
+<link rel="stylesheet" href="{% static 'css/home.css' %}" />
 {% endblock %} {% block content %}
-<!-- Hero Section -->
-<section
-  class="hero"
-  style="
-    text-align: center;
-    padding: 3rem 1rem;
-    background: linear-gradient(135deg, #2c5aa0, #7ed321);
-    color: white;
-  "
->
-  <!-- Logo can be reused from base.html or displayed here as a graphic if desired -->
-  <h1>Welcome to ReelzAir</h1>
-  <p style="font-size: 1.2rem; margin: 1rem auto; max-width: 600px">
-    Discover innovative air purifiers for a clean and sustainable tomorrow.
-  </p>
-  <!-- Call to Action Buttons -->
-  <div class="cta-buttons" style="margin-top: 2rem">
-    
-  </div>
-</section>
+<main>
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <!-- image is the only content-->
+  </section>
 
-<!-- Additional Public Info Section -->
-<section class="info" style="padding: 2rem 1rem">
-  <div style="max-width: 800px; margin: 0 auto; text-align: center">
-    <h2>Our Mission</h2>
-    <p>
-      At ReelzAir, our commitment is to deliver clean air and promote a
-      healthier, purer world. Explore our eco-friendly solutions that blend
-      cutting-edge technology with sustainable values.
-    </p>
-  </div>
-</section>
+  <!-- Additional Public Info Section -->
+  <section class="info" style="padding: 2rem 1rem">
+    <div class="card" id="blue-card">
+      <h2>Breathe Bold with ReelzAir</h2>
+      <p>Eco-Brick Program</p>
+      <p>
+        Turn single-use bottles into building blocks for good! Join our
+        community to upcycle plastics into real change.
+      </p>
+      <button class="cta-button">Explore the Product</button>
+    </div>
+  </section>
+
+  <!-- Additional Features Section -->
+  <section class="features-section" style="padding: 2rem 1rem">
+    <div class="stat-card">
+      <img src="{% static 'images/home/stat-card-graphics.svg'%}" alt="" />
+      <p id="stat">95%</p>
+      <p>reduction in airborne particles</p>
+    </div>
+    <!-- Features Scroller Section -->
+    <div class="features-scroller">
+      <div class="scroller-content">
+        <!-- Feature 1 -->
+        <div class="feature-card">
+          <div class="feature-icon"><img src="{% static 'images/home/reusable.svg'%}" alt=""></div>
+          <h3>Reusable Filter</h3>
+          <p>Washable filter that lasts up to 2 years</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card">
+          <div class="feature-icon"><img src="{% static 'images/home/quiet.svg'%}" alt=""></div>
+          <h3>Quiet Mode</h3>
+          <p>Whisper-quiet operation at just 24dB</p>
+        </div>
+
+        <!-- Add more cards as needed -->
+        <div class="feature-card">
+          <div class="feature-icon"><img src="{% static 'images/home/metrics.svg'%}" alt=""></div>
+          <h3>Smart Air Quality</h3>
+          <p>Smart air with detailed reports of your air quaility</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Eco-Brick Overview Section -->
+  <section class="info" style="padding: 2rem 1rem">
+    <div class="card" id="blue-card">
+      <h2>Breathe Bold with ReelzAir</h2>
+      <p>Eco-Brick Program</p>
+      <p>
+        Turn single-use bottles into building blocks for good! Join our
+        community to upcycle plastics into real change.
+      </p>
+      <button class="alt-cta-button">Explore the Product</button>
+    </div>
+  </section>
+</main>
 {% endblock %}
