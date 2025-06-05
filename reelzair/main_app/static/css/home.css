@@ -1,0 +1,120 @@
+main {
+  background-image: url("/static/images/home/background.png");
+  /* background-size: contain; */
+  background-repeat: repeat-y;
+  background-position: center center;
+  background-size: cover;
+}
+body {
+}
+.hero-section {
+  width: 100%;
+  height: 100vh;
+  background-image: url("/static/images/home/hero.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.features-section {
+  background-color: #242e7a;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+
+}
+.stat-card {
+  background-color: #fff;
+  color: #000;
+  border-radius: 4.5rem;
+  padding: 15px 60px;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+#stat{
+    color: #0D9488;
+    font-weight: bold;
+    font-size: 2.4rem;
+    margin: 5px 0 0 0;
+}
+/* features scroller */
+/* Horizontal Scroller */
+        .features-scroller {
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 20px 0;
+        }
+
+        .scroller-content {
+            display: flex;
+            gap: 25px;
+            padding: 0 20px;
+            scroll-behavior: smooth;
+        }
+
+        .feature-card {
+            min-width: 320px;
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            flex-shrink: 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            margin: 0 0 15px 0;
+            color: #333;
+            font-size: 1.4em;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            margin: 0;
+            color: #666;
+            line-height: 1.6;
+            font-size: 1em;
+        }
+
+        /* Custom scrollbar */
+        .features-scroller::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .features-scroller::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .features-scroller::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+
+        .features-scroller::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
