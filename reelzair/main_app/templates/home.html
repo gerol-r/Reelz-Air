@@ -1,0 +1,58 @@
+{% extends "base.html" %} {% block content %}
+<!-- Hero Section -->
+<section
+  class="hero"
+  style="
+    text-align: center;
+    padding: 3rem 1rem;
+    background: linear-gradient(135deg, #2c5aa0, #7ed321);
+    color: white;
+  "
+>
+  <!-- Logo can be reused from base.html or displayed here as a graphic if desired -->
+  <h1>Welcome to ReelzAir</h1>
+  <p style="font-size: 1.2rem; margin: 1rem auto; max-width: 600px">
+    Discover innovative air purifiers for a clean and sustainable tomorrow.
+  </p>
+  <!-- Call to Action Buttons -->
+  <div class="cta-buttons" style="margin-top: 2rem">
+    <a
+      href="{% url 'product-index' %}"
+      class="btn"
+      style="
+        margin-right: 1rem;
+        background: #7ed321;
+        padding: 1rem 2rem;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+      "
+      >Browse Products</a
+    >
+    <a
+      href="{% url 'about' %}"
+      class="btn"
+      style="
+        background: #fff;
+        padding: 1rem 2rem;
+        color: #2c5aa0;
+        text-decoration: none;
+        border-radius: 5px;
+      "
+      >Learn More</a
+    >
+  </div>
+</section>
+
+<!-- Additional Public Info Section -->
+<section class="info" style="padding: 2rem 1rem">
+  <div style="max-width: 800px; margin: 0 auto; text-align: center">
+    <h2>Our Mission</h2>
+    <p>
+      At ReelzAir, our commitment is to deliver clean air and promote a
+      healthier, purer world. Explore our eco-friendly solutions that blend
+      cutting-edge technology with sustainable values.
+    </p>
+  </div>
+</section>
+{% endblock %}
