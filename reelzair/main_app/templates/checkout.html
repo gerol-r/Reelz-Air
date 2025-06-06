@@ -5,7 +5,7 @@
   <form class="card" id="white-card">
     <div class="form-group">
       <label for="name">
-        <img src="{% static 'images/Person.png' %}" alt="Person Icon" />
+        <img src="{% static 'images/checkout/Person.png' %}" alt="Person Icon" />
         Name</label
       >
       <input
@@ -20,7 +20,7 @@
 
     <div class="form-group">
       <label for="email">
-        <img src="{% static 'images/email.png' %}" alt="Email Icon" />
+        <img src="{% static 'images/checkout/email.png' %}" alt="Email Icon" />
         Email</label
       >
       <input
@@ -35,7 +35,7 @@
 
     <div class="form-group">
       <label for="phone">
-        <img src="{% static 'images/phone.png' %}" alt="Phone Icon" />
+        <img src="{% static 'images/checkout/phone.png' %}" alt="Phone Icon" />
         Phone</label
       >
       <input
@@ -49,7 +49,7 @@
 
     <div class="form-group">
       <label for="address">
-        <img src="{% static 'images/house.png' %}" alt="House Icon" />
+        <img src="{% static 'images/checkout/house.png' %}" alt="House Icon" />
         Address</label
       >
       <input
@@ -65,7 +65,7 @@
     <div class="form-row">
       <div class="form-group half">
         <label for="city">
-          <img src="{% static 'images/city.png' %}" alt="City Icon" />
+          <img src="{% static 'images/checkout/city.png' %}" alt="City Icon" />
           City</label
         >
         <input
@@ -80,7 +80,7 @@
 
       <div class="form-group quarter">
         <label for="state">
-          <img src="{% static 'images/flag.png' %}" alt="Flag Icon" />
+          <img src="{% static 'images/checkout/flag.png' %}" alt="Flag Icon" />
         </label>
         <input
           type="text"
@@ -94,7 +94,7 @@
 
       <div class="form-group quarter">
         <label for="zip">
-          <img src="{% static 'images/pin.png' %}" alt="Location Pin Icon" />
+          <img src="{% static 'images/checkout/pin.png' %}" alt="Location Pin Icon" />
         </label>
         <input
           type="text"
@@ -116,7 +116,7 @@
       <div class="shipping-info">
           <div>
           <img
-            src="{% static 'images/deliverytruck.png' %}"
+            src="{% static 'images/checkout/deliverytruck.png' %}"
             alt="Delivery Truck Icon"
           />
         </div>
@@ -132,7 +132,7 @@
       <div class="shipping-info">
         <div>
           <img
-            src="{% static 'images/lightning.png' %}"
+            src="{% static 'images/checkout/lightning.png' %}"
             alt="Lightning Bolt Icon"
           />
         </div>
@@ -148,7 +148,7 @@
       <div class="shipping-info">
         <div>
           <img
-            src="{% static 'images/leaf.png' %}"
+            src="{% static 'images/checkout/leaf.png' %}"
             alt="Leaf Icon"
             />
         </div>
@@ -167,14 +167,14 @@
   <div class="card" id="white-card">
     <div class="form-group">
       <label for="cardholder-name">
-        <img src="{% static 'images/folder.png' %}" alt="Folder Icon" />
+        <img src="{% static 'images/checkout/folder.png' %}" alt="Folder Icon" />
         Cardholder Name</label>
       <input type="text" id="credit-card" name="cardholder_name" placeholder='Name on Card' required />
     </div>
     
     <div class="form-group">
       <label for="card-number">
-        <img src="{% static 'images/card.png' %}" alt="Card Icon" />
+        <img src="{% static 'images/checkout/card.png' %}" alt="Card Icon" />
         Card Number</label>
       <input type="text" id="credit-card" name="card_number" maxlength="19" placeholder='1234 5678 9012 3456' required />
     </div>
@@ -182,20 +182,20 @@
     <div class="form-row">
         <div class="form-group half">
             <label for="expiration">
-            <img src="{% static 'images/calendar.png' %}" alt="Calendar Icon" />
+            <img src="{% static 'images/checkout/calendar.png' %}" alt="Calendar Icon" />
             Expiration Date</label>
             <input type="text" id="credit-card" name="expiration" placeholder="MM/YY" required />
       </div>
 
       <div class="form-group half">
         <label for="cvv">
-            <img src="{% static 'images/lock.png' %}" alt="Lock Icon" />
+            <img src="{% static 'images/checkout/lock.png' %}" alt="Lock Icon" />
             CVV</label>
         <input type="text" id="credit-card" name="cvv" maxlength="4" placeholder='CVV' required />
     </div>
     </div>
     <div>
-      <img src="{% static 'images/cardicons.png' %}" alt="Card Payment Icons" />
+      <img src="{% static 'images/checkout/cardicons.png' %}" alt="Card Payment Icons" />
     </div>
 </div>
 <button class="cta-button" type="submit">Place Order</button>
