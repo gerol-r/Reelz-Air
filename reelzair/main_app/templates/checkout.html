@@ -1,0 +1,204 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}" />
+{% endblock %} {% block content %}
+<section>
+  <form class="card" id="white-card">
+    <div class="form-group">
+      <label for="name">
+        <img src="{% static 'images/checkout/Person.png' %}" alt="Person Icon" />
+        Name</label
+      >
+      <input
+        id="beige-card"
+        class="card"
+        type="text"
+        name="name"
+        placeholder="Full Name"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="email">
+        <img src="{% static 'images/checkout/email.png' %}" alt="Email Icon" />
+        Email</label
+      >
+      <input
+        id="beige-card"
+        class="card"
+        type="email"
+        name="email"
+        placeholder="your@email.com"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="phone">
+        <img src="{% static 'images/checkout/phone.png' %}" alt="Phone Icon" />
+        Phone</label
+      >
+      <input
+        id="beige-card"
+        class="card"
+        type="tel"
+        name="phone"
+        placeholder="(555) 123-4567"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="address">
+        <img src="{% static 'images/checkout/house.png' %}" alt="House Icon" />
+        Address</label
+      >
+      <input
+        id="beige-card"
+        class="card"
+        type="text"
+        name="address"
+        placeholder="Street Address"
+        required
+      />
+    </div>
+
+    <div class="form-row">
+      <div class="form-group half">
+        <label for="city">
+          <img src="{% static 'images/checkout/city.png' %}" alt="City Icon" />
+          City</label
+        >
+        <input
+          type="text"
+          id="beige-card"
+          class="card"
+          name="city"
+          placeholder="City"
+          required
+        />
+      </div>
+
+      <div class="form-group quarter">
+        <label for="state">
+          <img src="{% static 'images/checkout/flag.png' %}" alt="Flag Icon" />
+        </label>
+        <input
+          type="text"
+          id="beige-card"
+          class="card"
+          name="state"
+          placeholder="ST"
+          required
+        />
+      </div>
+
+      <div class="form-group quarter">
+        <label for="zip">
+          <img src="{% static 'images/checkout/pin.png' %}" alt="Location Pin Icon" />
+        </label>
+        <input
+          type="text"
+          id="beige-card"
+          class="card"
+          name="zip"
+          placeholder="Zip"
+          required
+        />
+      </div>
+    </div>
+
+</section>
+
+<section class="card" id="shipping">
+  <h2>Shipping Method</h2>
+  <div class="shipping-card-container">
+    <div class="shipping-card" id="white-card">
+      <div class="shipping-info">
+          <div>
+          <img
+            src="{% static 'images/checkout/deliverytruck.png' %}"
+            alt="Delivery Truck Icon"
+          />
+        </div>
+        <div>
+          <h3>Standard Shipping</h3>
+          <p>3–5 business days.</p>
+        </div>
+        <div>$4.99</div>
+      </div>
+    </div>
+
+    <div class="shipping-card" id="white-card">
+      <div class="shipping-info">
+        <div>
+          <img
+            src="{% static 'images/checkout/lightning.png' %}"
+            alt="Lightning Bolt Icon"
+          />
+        </div>
+        <div>
+          <h3>Express Shipping</h3>
+          <p>1–2 business days.</p>
+        </div>
+        <div>$14.99</div>
+      </div>
+    </div>
+
+    <div class="shipping-card" id="white-card">
+      <div class="shipping-info">
+        <div>
+          <img
+            src="{% static 'images/checkout/leaf.png' %}"
+            alt="Leaf Icon"
+            />
+        </div>
+        <div>
+          <h3>Eco Delivery</h3>
+          <p>5-7 days, zero emissions</p>
+        </div>
+        <div>$2.99</div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<section id="payment" class="card">
+  <h2>Payment</h2>
+  <div class="card" id="white-card">
+    <div class="form-group">
+      <label for="cardholder-name">
+        <img src="{% static 'images/checkout/folder.png' %}" alt="Folder Icon" />
+        Cardholder Name</label>
+      <input type="text" id="credit-card" name="cardholder_name" placeholder='Name on Card' required />
+    </div>
+    
+    <div class="form-group">
+      <label for="card-number">
+        <img src="{% static 'images/checkout/card.png' %}" alt="Card Icon" />
+        Card Number</label>
+      <input type="text" id="credit-card" name="card_number" maxlength="19" placeholder='1234 5678 9012 3456' required />
+    </div>
+
+    <div class="form-row">
+        <div class="form-group half">
+            <label for="expiration">
+            <img src="{% static 'images/checkout/calendar.png' %}" alt="Calendar Icon" />
+            Expiration Date</label>
+            <input type="text" id="credit-card" name="expiration" placeholder="MM/YY" required />
+      </div>
+
+      <div class="form-group half">
+        <label for="cvv">
+            <img src="{% static 'images/checkout/lock.png' %}" alt="Lock Icon" />
+            CVV</label>
+        <input type="text" id="credit-card" name="cvv" maxlength="4" placeholder='CVV' required />
+    </div>
+    </div>
+    <div>
+      <img src="{% static 'images/checkout/cardicons.png' %}" alt="Card Payment Icons" />
+    </div>
+</div>
+<button class="cta-button" type="submit">Place Order</button>
+</section>
+</form>
+{% endblock %}
