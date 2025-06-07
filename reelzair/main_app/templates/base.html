@@ -1,78 +1,82 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ReelzAir - Clean Air, Pure World</title>
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
     {% block head %}{% endblock %}
-</head>
-<body>
-  <header>
-    <div class="header-container">
-      <!-- Logo -->
-      <div class="logo">
-        <img src="{% static 'images/reelzair-logo.svg' %}" alt="ReelzAir Logo">
-      </div>
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <!-- Logo -->
+        <div class="logo">
+          <a href="/"
+            ><img
+              src="{% static 'images/reelzair-logo.svg' %}"
+              alt="ReelzAir Logo"
+          /></a>
+        </div>
 
-      <!-- Right side container -->
-      <div class="header-right">
-        <!-- Hamburger button (initially showing hamburger bars) -->
-        <button id="menuToggle" class="hamburger-menu" onclick="toggleMenu()">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
-        </button>
-        <!-- Shopping Cart Icon -->
-        <div id="cartIcon" class="cart-icon-container">
-          <a href="/cart">
-            <img src="{% static 'images/cart.svg' %}" alt="Cart Icon">
-          </a>
+        <!-- Right side container -->
+        <div class="header-right">
+          <!-- Hamburger button (initially showing hamburger bars) -->
+          <button id="menuToggle" class="hamburger-menu" onclick="toggleMenu()">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </button>
+          <!-- Shopping Cart Icon -->
+          <div id="cartIcon" class="cart-icon-container">
+            <a href="/cart">
+              <img src="{% static 'images/cart.svg' %}" alt="Cart Icon" />
+            </a>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- Navigation menu (hidden by default) -->
-    <nav class="nav-links" id="nav-links">
-      <ul>
-        <li>Home</li>
-        <li>My Cart</li>
-        <li>App Features</li>
-        <li>Eco-Brick Program</li>
-        <li>Shop</li>
-        <li>Account</li>
-      </ul>
-    </nav>
-  </header>
-    <main>
+      <!-- Navigation menu (hidden by default) -->
+      <nav class="nav-links" id="nav-links">
+        <ul>
+          <li>Home</li>
+          <li>My Cart</li>
+          <li>App Features</li>
+          <li>Eco-Brick Program</li>
+          <li>Shop</li>
+          <li>Account</li>
+        </ul>
+      </nav>
+    </header>
+    <main>{% block content %}{% endblock %}</main>
+    <script>
+      // JavaScript to toggle the navigation menu
+      function toggleMenu() {
+        var navMenu = document.getElementById("nav-links");
+        var menuBtn = document.getElementById("menuToggle");
+        var cartIcon = document.getElementById("cartIcon");
 
-        {% block content %}{% endblock %}
-    </main>
-  <script>
-    // JavaScript to toggle the navigation menu
-    function toggleMenu() {
-      var navMenu = document.getElementById("nav-links");
-      var menuBtn = document.getElementById("menuToggle");
-      var cartIcon = document.getElementById("cartIcon");
-
-      // If the nav menu is currently shown, hide it and revert the button
-      if (navMenu.style.display === "block") {
-        navMenu.style.display = "none";
-        // Restore hamburger icon (three bars)
-        menuBtn.innerHTML = '<span class="bar"></span><span class="bar"></span><span class="bar"></span>';
-        // Show the cart icon
-        if(cartIcon) cartIcon.style.display = "block";
-      } else {
-        // Show the nav menu and change the button to an X
-        navMenu.style.display = "block";
-        menuBtn.innerHTML = 'X';
-        // Hide the cart icon while the menu is displayed
-        if(cartIcon) cartIcon.style.display = "none";
+        // If the nav menu is currently shown, hide it and revert the button
+        if (navMenu.style.display === "block") {
+          navMenu.style.display = "none";
+          // Restore hamburger icon (three bars)
+          menuBtn.innerHTML =
+            '<span class="bar"></span><span class="bar"></span><span class="bar"></span>';
+          // Show the cart icon
+          if (cartIcon) cartIcon.style.display = "block";
+        } else {
+          // Show the nav menu and change the button to an X
+          navMenu.style.display = "block";
+          menuBtn.innerHTML = "X";
+          // Hide the cart icon while the menu is displayed
+          if (cartIcon) cartIcon.style.display = "none";
+        }
       }
-    }
-  </script>
-</body>
+    </script>
+  </body>
 </html>
-
