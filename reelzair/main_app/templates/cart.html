@@ -1,0 +1,77 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %}" />
+{% endblock %} {% block content %}
+<h1 class="carttitle">Your ReelzAir Cart</h1>
+<section class="card">
+    <div class="cart-icon-container">
+        <div class="card" id="white-card">
+            <div class="cart-item-info">
+                <div>
+                    <img
+                     src="{% static 'images' %}"
+                     alt="Deep Blue Purifier">
+                </div>
+                <div>
+                    <h3>ReelzAir Purifier - Deep Blue</h3>
+                    <p>Made with 3 eco-bricks</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cart-icon-container">
+        <div class="card" id="white-card">
+            <div class="cart-item-info">
+                <div>
+                    <img
+                     src="{% static 'images' %}"
+                     alt="Deep Blue Purifier">
+                </div>
+                <div>
+                    <h3>ReelzAir Purifier - Lime Green</h3>
+                    <p>Made with 3 eco-bricks</p>
+                </div>
+                <div>
+                    <h4> - 1 +  $199 </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="price-card">
+      <div class="shipping-info">
+        <div class="form-row">
+          <img
+            src="{% static 'images/checkout/leaf.png' %}"
+            alt="Leaf Icon"
+            />
+          <h3>Subtotal</h3>
+        </div>
+        <div>$399</div>
+    </div>
+         <div class="form-row">
+          <img
+            src="{% static 'images/checkout/leaf.png' %}"
+            alt="Leaf Icon"
+            />
+          <h3>Subtotal</h3>
+          <div>$399</div>
+        </div>
+         </div>
+    </div>
+    </div>
+  </div>
+
+
+<div class="buttons-container">
+<button class="cta-button">Proceed to Checkout</button>
+<button class="cta-button2">Continue Shopping</button>
+</div>
+</div>
+
+    
+      
+    
+
+</section>
+
+
+{% endblock %}
