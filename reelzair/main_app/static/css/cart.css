@@ -8,7 +8,7 @@ h1 {
 .carttitle {
     display: flex;
     justify-content: center;
-    color: #fff;
+    color: rgb(9, 9, 153);
 }
 h2 {
   font-weight: 400;
@@ -17,6 +17,11 @@ p,
 a {
   font-weight: 300;
 }
+
+p {
+  font-weight: 400;
+}
+
 /* ---------- All Container Max-Widths ---------- */
 body,
 main,
@@ -48,11 +53,7 @@ footer {
 }
 
 main {
-  background-image: url("/static/images/home/background.png");
-  /* background-size: contain; */
-  background-repeat: repeat-y;
-  background-position: center center;
-  background-size: cover;
+  background-color: #fff;
 }
 
 /* ---------- Hamburger Menu Button ---------- */
@@ -153,6 +154,38 @@ main {
   /* Remove default button styling */
   /* outline: none;
     border: 3px solid #242E7A; */
+}
+
+.product-img {
+  width: 2000px;
+  height: auto;
+  border: 3px solid #242e7a;
+  border-radius: 8px;
+  padding: 5px;
+  display: block;
+}
+
+.price-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.shipping-info1 {
+  display: flex;
+  align-items: center; /* Stack items vertically */
+  gap: 10px;              /* Optional: space between rows */
+}
+
+.cart-item-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.item-details {
+  display: flex;
+  flex-direction: column;
 }
 
 .buttons-container {
@@ -291,8 +324,8 @@ main {
 /* Layout for multiple inputs in a row */
 .form-row {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+  align-items: center;
+  gap: 60px;
 }
 
 /* Size adjustments for different field widths */
@@ -352,11 +385,11 @@ main {
 }
 
 /* Hover effect */
-.shipping-card:hover {
+/* .shipping-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 6px 0 #181e51;
   cursor: pointer;
-}
+} */
 
 
 
@@ -408,4 +441,15 @@ main {
   font-family: "Fredoka", sans-serif;
   font-size: 1rem;
   padding: 1.25rem;
+}
+
+@media (max-width: 600px) {
+  .form-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .product-img {
+    max-width: 100%;
+  }
 }
