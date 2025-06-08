@@ -1,4 +1,5 @@
 from django.db import models
+from decimal import Decimal
 
 
 class Cart(models.Model):
@@ -12,8 +13,8 @@ class Cart(models.Model):
     filter_replacement_quantity = models.PositiveIntegerField(default=0)
 
     def total_price(self):
-        system_price = 129.99  
-        filter_price = 11.99
+        system_price = Decimal('129.99')  
+        filter_price = Decimal('11.99')
 
         return (self.filtration_system_quantity * system_price) + \
                (self.filter_replacement_quantity * filter_price)

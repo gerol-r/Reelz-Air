@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% load static %} {% block head %}
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}" />
+{% endblock %}
+{% block content %}
+  <div class="card" style="padding: 2rem; text-align: center;">
+    <h2>Thank you for your order!</h2>
+    <p>Your order has been placed successfully.</p>
+
+       {% if order %}
+      <h4>Order Summary</h4>
+      <p><strong>Order ID:</strong> {{ order.id }}</p>
+      <p><strong>Total Price:</strong> ${{ order.total_price }}</p>
+      <p><strong>Order Date:</strong> {{ order.order_date }}</p>
+      <hr>
+      <p><strong>Name:</strong> {{ order.cart.contact_name }}</p>
+      <p><strong>Email:</strong> {{ order.cart.contact_email }}</p>
+      <p><strong>Phone:</strong> {{ order.cart.contact_phone }}</p>
+      <p><strong>Filtration Systems:</strong> {{ order.cart.filtration_system_quantity }}</p>
+      <p><strong>Filter Replacements:</strong> {{ order.cart.filter_replacement_quantity }}</p>
+    {% else %}
+      <p>Order information is not available.</p>
+    {% endif %}
+
+    <button class='cta-button'
+    onclick="window.location.href='/';"
+    > Home
+    </button>
+  </div>
+{% endblock %}
