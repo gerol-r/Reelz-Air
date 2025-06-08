@@ -2,7 +2,8 @@
 <link rel="stylesheet" href="{% static 'css/checkout.css' %}" />
 {% endblock %} {% block content %}
 <section>
-  <form class="card" id="white-card">
+  <form class="card" id="white-card" method="POST" action={% url 'checkout' %}>
+    {% csrf_token %}
     <div class="form-group">
       <label for="name">
         <img src="{% static 'images/checkout/Person.png' %}" alt="Person Icon" />
@@ -196,6 +197,7 @@
 
         <img id='cardicons' src="{% static 'images/checkout/cardicons.png' %}" alt="Card Payment Icons" />
     </div>
+    
     
     <button class="cta-button" type="submit">Place Order</button>
 </div>
