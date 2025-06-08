@@ -162,9 +162,9 @@
   </div>
 </section>
 
-<section id="payment" class="card">
-  <h2>Payment</h2>
-  <div class="card" id="white-card">
+<section id="payment" >
+    <div class="card" id="white-card">
+      <h2>Payment</h2>
     <div class="form-group">
       <label for="cardholder-name">
         <img src="{% static 'images/checkout/folder.png' %}" alt="Folder Icon" />
@@ -185,20 +185,20 @@
             <img src="{% static 'images/checkout/calendar.png' %}" alt="Calendar Icon" />
             Expiration Date</label>
             <input type="text" id="credit-card" name="expiration" placeholder="MM/YY" required />
-      </div>
+        </div>
 
-      <div class="form-group half">
+        <div class="form-group half">
         <label for="cvv">
             <img src="{% static 'images/checkout/lock.png' %}" alt="Lock Icon" />
             CVV</label>
         <input type="text" id="credit-card" name="cvv" maxlength="4" placeholder='CVV' required />
+        </div>
+
+        <img id='cardicons' src="{% static 'images/checkout/cardicons.png' %}" alt="Card Payment Icons" />
     </div>
-    </div>
-    <div>
-      <img src="{% static 'images/checkout/cardicons.png' %}" alt="Card Payment Icons" />
-    </div>
+    
+    <button class="cta-button" type="submit">Place Order</button>
 </div>
-<button class="cta-button" type="submit">Place Order</button>
 </section>
 </form>
 {% endblock %}

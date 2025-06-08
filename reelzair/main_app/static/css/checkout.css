@@ -113,8 +113,9 @@ main {
   display: inline-block;
   text-align: center;
   transition: all 0.2s ease;
-  width: 37em;
-  height: 4em;
+  width: 100%;
+  box-sizing: border-box;
+
 
   /* Black drop shadow */
   box-shadow: 0 4px 0 #242e7a;
@@ -178,7 +179,6 @@ main {
   padding: 15px 40px;
   font-size: 18px;
   text-decoration: none;
-  display: inline-block;
   text-align: center;
   box-shadow: 0 4px 0 #181e51;
   max-width: 900px;
@@ -188,7 +188,12 @@ main {
 .card h2 {
     text-align: left;
 }
-
+#cardicons {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 1rem;
+}
 #blue-card {
   background-color: #87e6e0;
   box-shadow: 0 6px 0 #000000;
@@ -316,28 +321,12 @@ main {
   background-color: #87e6e0;
 }
 
-.payment-section {
-  padding: 2rem 1rem;
-  text-align: center;
-}
-
-.payment-section h2 {
-  font-size: 2rem;
-  color: #242e7a;
-  margin-bottom: 2rem;
-  font-weight: 400;
-  text-align: start;
-}
-
 #credit-card {
   background-color: #fffde0; 
   max-width: 900px;
   margin: 0 auto 2rem auto;
   text-align: left;
   box-shadow: 0 4px 0 #181e51;
-}
-
-#credit-card input {
   font-family: "Fredoka", sans-serif;
   font-size: 1rem;
   padding: 1.25rem;
