@@ -11,6 +11,8 @@ h2 {
 p,
 a {
   font-weight: 300;
+  text-decoration: none;
+  color: #000;
 }
 /* ---------- All Container Max-Widths ---------- */
 body,
@@ -111,13 +113,7 @@ footer {
   display: inline-block;
   text-align: center;
   transition: all 0.2s ease;
-
-  /* Black drop shadow */
   box-shadow: 0 4px 0 #242e7a;
-
-  /* Remove default button styling */
-  /* outline: none;
-    border: 3px solid #242E7A; */
 }
 
 /* Hover effect */

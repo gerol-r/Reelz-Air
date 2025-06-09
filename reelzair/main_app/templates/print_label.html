@@ -1,0 +1,87 @@
+    
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Barcode+128&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/print_label.css' %}" />
+</head>
+<div class="instructions" style="text-align: center; margin-top: 20px; font-size: 12px; color: #677;">
+        Print as PDF (6" × 4") • Click "Generate PDF" button or use Ctrl+P
+    </div>
+<body>
+    <div class="label">
+        <div class="priority">ECO-FRIENDLY</div>
+        
+        <div class="header">
+            <div class="company-name">REELZ AIR</div>
+            <div class="eco-tag">Eco-Brick Program</div>
+        </div>
+        
+        <div class="addresses">
+            <div class="address-block">
+                <div class="address-title">From:</div>
+                <div class="address-content">
+                    [Your Name]<br>
+                    [Your Address Line 1]<br>
+                    [Your Address Line 2]<br>
+                    [City, State ZIP]<br>
+                    [Phone Number]
+                </div>
+            </div>
+            
+            <div class="address-block">
+                <div class="address-title">To:</div>
+                <div class="address-content">
+                    <strong>REELZ AIR RECYCLING CO.</strong><br>
+                    Attn: Materials Processing Dept.<br>
+                    1234 Greenway Industrial Blvd<br>
+                    Suite 150<br>
+                    New York, NY 62704<br>
+                    (555) REELZ-AIR
+                </div>
+            </div>
+        </div>
+        
+        <div class="package-info">
+            <div>
+                <strong>Contents:</strong> Eco-Bricks (Recycled Material)<br>
+                <strong>Weight:</strong> _____ lbs<br>
+                <strong>Qty:</strong> _____ pieces
+            </div>
+            <div>
+                <strong>Service:</strong> Ground<br>
+                <strong>Date:</strong> ___/___/_____
+            </div>
+        </div>
+        
+        <div class="barcode-section">
+            <div class="barcode">1234567890123</div>
+            <div class="barcode-number">1234567890123</div>
+        </div>
+        
+        <div class="tracking">
+            Tracking #: 1Z999AA1234567890
+        </div>
+    </div>
+    
+    <script>
+        // Function to generate PDF
+        function generatePDF() {
+            window.print();
+        }
+        
+        // Auto-generate PDF when page loads
+        window.addEventListener('load', function() {
+            // Add a print button for manual PDF generation
+            const printBtn = document.createElement('button');
+            printBtn.textContent = 'Generate PDF';
+            printBtn.style.cssText = 'margin: 20px auto; display: block; padding: 10px 20px; background: #4a7c59; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px;';
+            printBtn.onclick = generatePDF;
+            document.body.appendChild(printBtn);
+        });
+    </script>
+</body>
+</html>
