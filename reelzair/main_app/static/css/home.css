@@ -115,6 +115,19 @@ body {
 .features-scroller::-webkit-scrollbar-thumb:hover {
   background: #a8a8a8;
 }
+.info {
+  height: auto;
+  margin-bottom: 0;
+  margin: auto;
+}
+.info a {
+  text-align: center;
+  color: #87e6e0;
+  margin-bottom: 5px;
+}
+.info a:hover {
+  color: #a6f41d;
+}
 .info .card img {
   width: 100% !important;
   max-width: 100% !important;
@@ -122,8 +135,82 @@ body {
   display: block;
   margin: 0 auto;
 }
+/* Flip-Cards */
+.flip-container {
+  perspective: 1000px;
+  width: 100%;
+  /* max-width: 400px; */
+  margin: 0;
+  height: auto;
+  min-height: 300px;
+  position: relative;
+  z-index: 10;
+}
+
+.flip-inner {
+  position: relative;
+  width: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  min-height: 400px;
+}
+
+.flip-container.flipped .flip-inner {
+  transform: rotateY(180deg);
+  height: auto;
+}
+
+.flip-front,
+.flip-back {
+  position: absolute;
+  width: 100%;
+  backface-visibility: hidden;
+  overflow: hidden;
+}
+
+.flip-front {
+  position: absolute;
+  min-height: 400px;
+}
+
+.flip-back {
+  transform: rotateY(180deg);
+  margin: auto;
+}
+
+/* Back face styling */
+.flip-back .card {
+  color: #242e7a;
+  border-color: #87e6e0;
+}
+
+/* .flip-back .back-content {
+  text-align: center;
+} */
+
+.flip-back .back-content ol {
+  text-align: left;
+  padding-left: 1rem;
+  margin: 0.5rem 0;
+}
+.flip-back .back-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.flip-back .back-content li {
+  margin: 0.5rem 0;
+  line-height: 1.2;
+}
+.flip-back .back-content {
+  margin-bottom: 1rem;
+}
 
 /* Dashboard Example */
+.db {
+  margin-top: 0 auto;
+}
 .db-card img {
   width: 100%;
   height: auto;

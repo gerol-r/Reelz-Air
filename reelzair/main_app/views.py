@@ -9,6 +9,9 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+def print_label(request):
+    return render(request, 'print_label.html')
+
 def cart(request):
     return render(request, 'cart.html')
 
