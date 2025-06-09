@@ -21,6 +21,13 @@ def checkout(request):
         city = request.POST.get('city')
         state = request.POST.get('state')
         zip_code = request.POST.get('zip')
+        shipping_method = request.POST.get('shipping_method')
+
+        shipping_costs = {
+            'standard': Decimal('4.99'),
+            'express': Decimal('14.99'),
+            'eco': Decimal('2.99'),
+        }
 
         filtration_quantity = int(request.POST.get('filtration_quantity', 1))
         filter_quantity = int(request.POST.get('filter_quantity', 2))
@@ -33,7 +40,9 @@ def checkout(request):
             filter_replacement_quantity=filter_quantity,
             is_checked_out=True
         )
+        
 
+        shipping_price = shipping_costs.get(shipping_method, Decimal('0.00'))
         total = Decimal(cart.total_price())
 
         order = Order.objects.create(
@@ -42,8 +51,10 @@ def checkout(request):
             paid=True
         )
         return redirect('checkout_success')
+    total = Decimal('0.00')
+    shipping_price = Decimal('0.00')
     
-    return render(request, 'checkout.html')
+    return render(request, 'checkout.html', {'total': total, 'shipping_price': shipping_price})
 
 def checkout_success(request):
     latest_order = Order.objects.latest('id')
