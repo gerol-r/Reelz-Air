@@ -44,6 +44,8 @@
         class="card"
         type="tel"
         name="phone"
+        pattern="^\(\d{3}\) \d{3}-\d{4}$"
+        maxlength='10'
         placeholder="(555) 123-4567"
       />
     </div>
@@ -88,6 +90,8 @@
           id="beige-card"
           class="card"
           name="state"
+          maxlength="2"
+          pattern="[A-Z]{2}"
           placeholder="ST"
           required
         />
@@ -102,6 +106,7 @@
           id="beige-card"
           class="card"
           name="zip"
+          maxlength='5'
           placeholder="Zip"
           required
         />
@@ -113,54 +118,42 @@
 <section class="card" id="shipping">
   <h2>Shipping Method</h2>
   <div class="shipping-card-container">
-    <div class="shipping-card" id="white-card">
-      <div class="shipping-info">
-          <div>
-          <img
-            src="{% static 'images/checkout/deliverytruck.png' %}"
-            alt="Delivery Truck Icon"
-          />
-        </div>
-        <div>
-          <h3>Standard Shipping</h3>
-          <p>3–5 business days.</p>
-        </div>
-        <div>$4.99</div>
+  <label class="shipping-card" id="white-card">
+    <input type="radio" name="shipping_method" value="standard" data-price="4.99" required />
+    <div class="shipping-info">
+      <img src="{% static 'images/checkout/deliverytruck.png' %}" alt="Delivery Truck Icon" />
+      <div>
+        <h3>Standard Shipping</h3>
+        <p>3–5 business days.</p>
       </div>
+      <div>$4.99</div>
     </div>
+  </label>
 
-    <div class="shipping-card" id="white-card">
-      <div class="shipping-info">
-        <div>
-          <img
-            src="{% static 'images/checkout/lightning.png' %}"
-            alt="Lightning Bolt Icon"
-          />
-        </div>
-        <div>
-          <h3>Express Shipping</h3>
-          <p>1–2 business days.</p>
-        </div>
-        <div>$14.99</div>
+  <label class="shipping-card" id="white-card">
+    <input type="radio" name="shipping_method" value="express" data-price="14.99" />
+    <div class="shipping-info">
+      <img src="{% static 'images/checkout/lightning.png' %}" alt="Lightning Icon" />
+      <div>
+        <h3>Express Shipping</h3>
+        <p>1–2 business days.</p>
       </div>
+      <div>$14.99</div>
     </div>
+  </label>
 
-    <div class="shipping-card" id="white-card">
-      <div class="shipping-info">
-        <div>
-          <img
-            src="{% static 'images/checkout/leaf.png' %}"
-            alt="Leaf Icon"
-            />
-        </div>
-        <div>
-          <h3>Eco Delivery</h3>
-          <p>5-7 days, zero emissions</p>
-        </div>
-        <div>$2.99</div>
+  <label class="shipping-card" id="white-card">
+    <input type="radio" name="shipping_method" value="eco" data-price="2.99" />
+    <div class="shipping-info">
+      <img src="{% static 'images/checkout/leaf.png' %}" alt="Leaf Icon" />
+      <div>
+        <h3>Eco Delivery</h3>
+        <p>5–7 days, zero emissions</p>
+      </div>
+      <div>$2.99</div>
     </div>
-    </div>
-  </div>
+  </label>
+</div>
 </section>
 
 <section id="payment" >
@@ -177,7 +170,10 @@
       <label for="card-number">
         <img src="{% static 'images/checkout/card.png' %}" alt="Card Icon" />
         Card Number</label>
-      <input type="text" id="credit-card" name="card_number" maxlength="19" placeholder='1234 5678 9012 3456' required />
+      <input type="text" id="credit-card" 
+      name="card_number" maxlength="19" 
+      pattern="\d{4}[\s]?\d{4}[\s]?\d{4}[\s]?\d{4}" 
+      placeholder='1234 5678 9012 3456' required />
     </div>
 
     <div class="form-row">
@@ -185,22 +181,44 @@
             <label for="expiration">
             <img src="{% static 'images/checkout/calendar.png' %}" alt="Calendar Icon" />
             Expiration Date</label>
-            <input type="text" id="credit-card" name="expiration" placeholder="MM/YY" required />
+            <input type="text" id="credit-card"
+            name="expiration" pattern="^(0[1-9]|1[0-2])\/\d{2}$"
+            maxlength='4'
+            placeholder="MM/YY" required />
         </div>
 
         <div class="form-group half">
         <label for="cvv">
             <img src="{% static 'images/checkout/lock.png' %}" alt="Lock Icon" />
             CVV</label>
-        <input type="text" id="credit-card" name="cvv" maxlength="4" placeholder='CVV' required />
+        <input type="text" id="credit-card" name="cvv" maxlength="3" placeholder='CVV' required />
         </div>
 
         <img id='cardicons' src="{% static 'images/checkout/cardicons.png' %}" alt="Card Payment Icons" />
     </div>
     
+    <div class="price-list">
+  <h3>Total:</h3>
+  <div id="total-price">${{ total|floatformat:2 }}</div> <!-- optional live update -->
+</div>
     
     <button class="cta-button" type="submit">Place Order</button>
 </div>
 </section>
 </form>
+<script>
+    const baseTotal = parseFloat("{{ total|floatformat:2 }}");
+
+  const shippingRadios = document.querySelectorAll('input[name="shipping_method"]');
+  const totalDiv = document.getElementById('total-price'); // optional display element
+
+  shippingRadios.forEach(radio => {
+    radio.addEventListener('change', () => {
+      const shippingPrice = parseFloat(radio.dataset.price);
+      // optionally display or update a total
+      const newTotal = baseTotal + shippingPrice;
+    totalDiv.textContent = `$${newTotal.toFixed(2)}`;
+    });
+  });
+</script>
 {% endblock %}

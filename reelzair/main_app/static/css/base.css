@@ -55,6 +55,7 @@ footer {
   padding: 0 10px;
   font-size: 24px; /* Used when showing 'X';*/
   color: #a6f41d; /* Used when showing 'X';*/
+  justify-content: center;
 }
 .hamburger-menu .bar {
   display: block;
