@@ -15,6 +15,120 @@
             margin: 0 auto;
             position: relative;
         }
+         @media screen and (max-width: 768px) {
+            .label {
+                width: 100%;
+                max-width: 500px;
+                height: auto;
+                min-height: 280px;
+                padding: 15px;
+            }
+            .company-name {
+                font-size: 16px;
+            }
+            .eco-tag {
+                font-size: 11px;
+            }
+            .address-title {
+                font-size: 11px;
+            }
+            .address-content {
+                font-size: 10px;
+            }
+            .package-info {
+                font-size: 10px;
+            }
+            .barcode {
+                font-size: 20px;
+                padding: 4px;
+            }
+            .barcode-number {
+                font-size: 7px;
+            }
+            .tracking {
+                font-size: 9px;
+            }
+            .priority {
+                font-size: 9px;
+                padding: 4px 6px;
+            }
+        }
+        
+        @media screen and (max-width: 450px) {
+            .label {
+                max-width: 450px;
+                min-height: 260px;
+                padding: 12px;
+            }
+            .company-name {
+                font-size: 15px;
+            }
+            .eco-tag {
+                font-size: 10px;
+            }
+            .address-title {
+                font-size: 10px;
+            }
+            .address-content {
+                font-size: 9px;
+            }
+            .package-info {
+                font-size: 9px;
+            }
+            .barcode {
+                font-size: 18px;
+                padding: 3px;
+            }
+            .barcode-number {
+                font-size: 6px;
+            }
+            .tracking {
+                font-size: 8px;
+            }
+            .priority {
+                font-size: 8px;
+                padding: 3px 5px;
+            }
+        }
+        
+        @media screen and (max-width: 400px) {
+            .label {
+                max-width: 400px;
+                min-height: 240px;
+                padding: 10px;
+            }
+            .company-name {
+                font-size: 14px;
+            }
+            .eco-tag {
+                font-size: 9px;
+            }
+            .address-title {
+                font-size: 9px;
+            }
+            .address-content {
+                font-size: 8px;
+                line-height: 1.2;
+            }
+            .package-info {
+                font-size: 8px;
+            }
+            .barcode {
+                font-size: 16px;
+                padding: 2px;
+            }
+            .barcode-number {
+                font-size: 5px;
+            }
+            .tracking {
+                font-size: 7px;
+            }
+            .priority {
+                font-size: 7px;
+                padding: 2px 4px;
+            }
+        }
+        
         .header {
             text-align: center;
             border-bottom: 2px solid #000;
