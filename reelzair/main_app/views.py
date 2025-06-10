@@ -47,18 +47,31 @@ def checkout(request):
 
         shipping_price = shipping_costs.get(shipping_method, Decimal('0.00'))
         total = Decimal(cart.total_price())
+        full_total = total + shipping_price
 
         order = Order.objects.create(
             cart=cart,
-            total_price=total,
+            total_price=full_total,
             paid=True
         )
+
+        request.session['order_id'] = order.id
+
         return redirect('checkout_success')
+    
     total = Decimal('0.00')
     shipping_price = Decimal('0.00')
     
     return render(request, 'checkout.html', {'total': total, 'shipping_price': shipping_price})
 
 def checkout_success(request):
-    latest_order = Order.objects.latest('id')
-    return render(request, 'checkout_success.html', {'order': latest_order})
+    order_id = request.session.get('order_id')
+    order = None
+
+    if order_id:
+        try:
+            order = Order.objects.get(id=order_id)
+        except Order.DoesNotExist:
+            pass
+
+    return render(request, 'checkout_success.html', {'order': order})

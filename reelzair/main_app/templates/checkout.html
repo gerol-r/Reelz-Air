@@ -1,6 +1,7 @@
 {% extends 'base.html' %} {% load static %} {% block head %}
 <link rel="stylesheet" href="{% static 'css/checkout.css' %}" />
 {% endblock %} {% block content %}
+<main>
 <section>
   <form class="card" id="white-card" method="POST" action={% url 'checkout' %}>
     {% csrf_token %}
@@ -44,8 +45,9 @@
         class="card"
         type="tel"
         name="phone"
-        pattern="^\(\d{3}\) \d{3}-\d{4}$"
-        maxlength='10'
+        pattern="\d{3}-\d{3}-\d{4}"
+  title="Phone number must be in the format 123-456-7890"
+        maxlength='12'
         placeholder="(555) 123-4567"
       />
     </div>
@@ -183,7 +185,7 @@
             Expiration Date</label>
             <input type="text" id="credit-card"
             name="expiration" pattern="^(0[1-9]|1[0-2])\/\d{2}$"
-            maxlength='4'
+            maxlength='5'
             placeholder="MM/YY" required />
         </div>
 
@@ -206,6 +208,7 @@
 </div>
 </section>
 </form>
+</main>
 <script>
     const baseTotal = parseFloat("{{ total|floatformat:2 }}");
 
