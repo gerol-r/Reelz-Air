@@ -139,7 +139,6 @@ body {
 .flip-container {
   perspective: 1000px;
   width: 100%;
-  /* max-width: 400px; */
   margin: 0;
   height: auto;
   min-height: 300px;
@@ -170,9 +169,9 @@ body {
 
 .flip-front {
   position: absolute;
-  min-height: 400px;
+  min-height: 380px;
+  height: auto;
 }
-
 .flip-back {
   transform: rotateY(180deg);
   margin: auto;
@@ -183,10 +182,6 @@ body {
   color: #242e7a;
   border-color: #87e6e0;
 }
-
-/* .flip-back .back-content {
-  text-align: center;
-} */
 
 .flip-back .back-content ol {
   text-align: left;
@@ -206,7 +201,34 @@ body {
 .flip-back .back-content {
   margin-bottom: 1rem;
 }
+/** about section flip card **/
+.about .flip-container {
+  min-height: 250px;
+  height: auto;
+  transition: height 0.8s ease, transform 0.8s ease;
+}
 
+.about .flip-inner {
+  min-height: 250px;
+  height: auto;
+}
+
+@media (max-width: 400px) {
+  .about .flip-front {
+    min-height: 285px;
+    padding-bottom: 15px;
+  }
+
+  /* Also update the container and inner for consistency */
+  .about .flip-container {
+    min-height: 285px;
+  }
+
+  .about .flip-inner {
+    min-height: 285px;
+  }
+}
+/** END about section flip card **/
 /* Dashboard Example */
 .db {
   margin-top: 0 auto;
