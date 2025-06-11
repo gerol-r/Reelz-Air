@@ -1,11 +1,64 @@
-{% extends 'base.html' %} {% load static %} {% block head %}
-<link rel="stylesheet" href="{% static 'css/cart.css' %}">
-{% endblock %} {% block content %}
+{% extends 'base.html' %} {% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ReelzAir - Clean Air, Pure World</title>
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    {% block head %}{% endblock %}
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <!-- Logo -->
+        <div class="logo">
+          <a href="/"
+            ><img
+              src="{% static 'images/reelzair-logo.svg' %}"
+              alt="ReelzAir Logo"
+          /></a>
+        </div>
+
+        <!-- Right side container -->
+        <div class="header-right">
+          <!-- Hamburger button (initially showing hamburger bars) -->
+          <button id="menuToggle" class="hamburger-menu" onclick="toggleMenu()">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </button>
+          <!-- Shopping Cart Icon -->
+          <div id="cartIcon" class="cart-icon-container">
+            <a href="/cart">
+              <img src="{% static 'images/cart.svg' %}" alt="Cart Icon" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- Navigation menu (hidden by default) -->
+      <nav class="nav-links" id="nav-links">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/cart">My Cart</a></li>
+          <li><a href="/#app-features">App Features</a></li>
+          <li><a href="/#eco-brick">Eco-Brick Program</a></li>
+          <li>Shop</li>
+          <li style="color: #b7b7b7">Account</li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      {% block content %}
 <h1 class="carttitle">Your ReelzAir Cart</h1>
 <section class="cart-section">
-  <div class="cart-icon-container">
-    <div class="shipping-card">
-      <div class="form-row">
+    <div class="card" id="white-card">
           <img
             class="product-img"
             src="{% static 'images/shoppingcart/deepblue.svg' %}"
@@ -14,14 +67,11 @@
         <div class="item-details">
           <h3>ReelzAir Purifier - Deep Blue</h3>
           <p>Made with 3 eco-bricks</p>
+          <div class="buttons-container1"><button><i class="fas fa-minus"></i> </button><p>1</p><button><i class="fas fa-plus"></i></button> <p>$129.99</p><button class="delete-item"><i class="fa-solid fa-trash"></i></button></div>
         </div>
-      </div>
-    </div>
   </div>
 
-  <div class="cart-icon-container">
-    <div class="shipping-card">
-      <div class="form-row">
+    <div class="card" id="white-card">
           <img
             class="product-img"
             src="{% static 'images/shoppingcart/limegreen.svg' %}"
@@ -30,31 +80,60 @@
         <div class="item-details">
           <h3>ReelzAir Purifier - Lime Green</h3>
           <p>Made with 3 eco-bricks</p>
+          <div class="buttons-container1"><button><i class="fas fa-minus"></i> </button><p>1</p><button><i class="fas fa-plus"></i></button> <p>$129.99</p><button class="delete-item"><i class="fa-solid fa-trash"></i></button></div>
         </div>
-      </div>
-    </div>
   </div>
 
   <div class="price-card">
-  <div class="shipping-info1">
     <div class="price-list">
-      <img src="{% static 'images/checkout/leaf.png' %}" alt="Leaf Icon" />
-      <h3>Subtotal</h3>
-      <div>$399</div>
+      <div class= "price-li">
+        <div id="itemized"><p><i style="color: #a6f41d;" class="fas fa-coins"></i> Subtotal</p></div>
+        <div id="price"><p>$399</p></div>
+      </div>
+      <div class= "price-li">
+        <div id="itemized"><p><i style="color: #87e6e0 ;" class="fas fa-receipt"></i> Estimated Tax</p></div>
+        <div id="price"><p>$23.94</p></div>
+      </div>
+      <div class= "price-li">
+        <div id="itemized"><p><i style="color: #242e7a;" class="fas fa-truck"></i> Shipping</p></div>
+        <div id="price"><p>$4.99</p></div>
+      </div>
     </div>
     <div class="price-list">
-      <img src="{% static 'images/checkout/leaf.png' %}" alt="Leaf Icon" />
-      <h3>Total</h3>
-      <div>$399</div>
     </div>
-  </div>
 </div>
   <div class="buttons-container">
-    <button onclick="window.location.href='/checkout';" class="cta-button">Proceed to Checkout</button>
+    <button class="cta-button">Proceed to Checkout</button>
     <button class="cta-button2">Continue Shopping</button>
   </div>
 </section>
+    </main>
+    <script>
+      // JavaScript to toggle the navigation menu
+      function toggleMenu() {
+        var navMenu = document.getElementById("nav-links");
+        var menuBtn = document.getElementById("menuToggle");
+        var cartIcon = document.getElementById("cartIcon");
 
+        // If the nav menu is currently shown, hide it and revert the button
+        if (navMenu.style.display === "block") {
+          navMenu.style.display = "none";
+          // Restore hamburger icon (three bars)
+          menuBtn.innerHTML =
+            '<span class="bar"></span><span class="bar"></span><span class="bar"></span>';
+          // Show the cart icon
+          if (cartIcon) cartIcon.style.display = "block";
+        } else {
+          // Show the nav menu and change the button to an X
+          navMenu.style.display = "block";
+          menuBtn.innerHTML = "X";
+          // Hide the cart icon while the menu is displayed
+          if (cartIcon) cartIcon.style.display = "none";
+        }
+      }
+    </script>
+  </body>
+</html>
 
 
 {% endblock %}

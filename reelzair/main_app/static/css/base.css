@@ -118,15 +118,30 @@ footer {
   box-shadow: 0 4px 0 #242e7a;
 }
 
+.cta-button2 {
+  background-color: #242e7a;
+  color: #a6f41d;
+  border: 3px solid #a6f41d;
+  border-radius: 50px;
+  padding: 15px 40px;
+  font-size: 18px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 0 #a6f41d;
+}
+
 /* Hover effect */
-.cta-button:hover {
+.cta-button, .cta-button2:hover {
   background-color: #a6f41d;
   transform: translateY(2px);
   box-shadow: 0 2px 0 #242e7a;
 }
 
 /* Active/pressed effect */
-.cta-button:active {
+.cta-button, .cta-button2:active {
   transform: translateY(4px);
   box-shadow: 0 6px 0 #242e7a;
 }
