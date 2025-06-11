@@ -201,7 +201,7 @@
     
     <div class="price-list">
   <h3>Total:</h3>
-  <div id="total-price">${{ total|floatformat:2 }}</div> <!-- optional live update -->
+  <div id="total-price">${{ total|floatformat:2 }}</div> 
 </div>
     
     <button class="cta-button" type="submit">Place Order</button>
@@ -213,12 +213,11 @@
     const baseTotal = parseFloat("{{ total|floatformat:2 }}");
 
   const shippingRadios = document.querySelectorAll('input[name="shipping_method"]');
-  const totalDiv = document.getElementById('total-price'); // optional display element
+  const totalDiv = document.getElementById('total-price'); 
 
   shippingRadios.forEach(radio => {
     radio.addEventListener('change', () => {
       const shippingPrice = parseFloat(radio.dataset.price);
-      // optionally display or update a total
       const newTotal = baseTotal + shippingPrice;
     totalDiv.textContent = `$${newTotal.toFixed(2)}`;
     });

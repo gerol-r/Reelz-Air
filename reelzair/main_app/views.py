@@ -26,7 +26,7 @@ def print_label(request):
 def cart(request):
     try:
         cart = get_or_create_cart(request)
-        items = cart.items.select_related('product')  # Assuming `related_name='items'` in CartItem
+        items = cart.items.select_related('product')  
 
         total = sum(item.product.price * item.quantity for item in items)
     except Cart.DoesNotExist:
@@ -77,7 +77,7 @@ def checkout(request):
             return redirect('checkout_success')
 
         except Cart.DoesNotExist:
-            pass  # You can add fallback/error here
+            pass  
 
     return render(request, 'checkout.html', {
         'total': Decimal('0.00'),
