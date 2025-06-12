@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %} {% load static %} 
 <!DOCTYPE html>
 <html lang="en">
@@ -67,7 +68,14 @@
         <div class="item-details">
           <h3>ReelzAir Purifier - Deep Blue</h3>
           <p>Made with 3 eco-bricks</p>
-          <div class="buttons-container1"><button><i class="fas fa-minus"></i> </button><p>1</p><button><i class="fas fa-plus"></i></button> <p>$129.99</p><button class="delete-item"><i class="fa-solid fa-trash"></i></button></div>
+          <div class="buttons-container1">
+            <button class="decrease" data-id="{{ item.id }}"><i class="fas fa-minus"></i> 
+            </button>
+            <p class="quantity">{{ item.quantity }}</p>
+            <button class="increase" data-id="{{ item.id }}"><i class="fas fa-plus"></i>
+            </button>
+             <p class="item.total">${{ item.item.total }}</p>
+             <button class="delete-item" data-id="{{ item.id }}"><i class="fa-solid fa-trash"></i></button></div>
         </div>
   </div>
 
@@ -131,6 +139,58 @@
           if (cartIcon) cartIcon.style.display = "none";
         }
       }
+
+      // Javacript for dynamics
+      document.querySelectorAll('.increase, .decrease').forEach(button => {
+        button.addEventListener('click', function () {
+          const itemId = this.dataset.id;
+          const action = this.classList.contains('increase') ? 'increase' : 'decrease';
+    
+          fetch(`/cart/item/${itemId}/update/`, {
+            method: 'POST',
+            headers: {
+              'X-CSRFToken': '{{ csrf_token }}',
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({ action })
+          })
+          .then(response => response.json())
+          .then(data => {
+            this.parentElement.querySelector('.quantity').textContent = data.quantity;
+            this.parentElement.querySelector('.item-total').textContent = `$${data.item_total.toFixed(2)}`;
+            updateSubtotal(); // Optional: refresh total
+          });
+        });
+      });
+
+      document.querySelectorAll('.delete-item').forEach(button => {
+        button.addEventListener('click', function () {
+          const itemId = this.dataset.id;
+    
+          fetch(`/cart/item/${itemId}/delete/`, {
+            method: 'POST',
+            headers: {
+              'X-CSRFToken': '{{ csrf_token }}',
+              'Content-Type': 'application/x-www-form-urlencoded',
+            }
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.deleted) {
+              this.closest('.card').remove();
+              updateSubtotal(); // Optional: refresh total
+             }
+           });
+         });
+       });
+
+       function updateSubtotal() {
+         let subtotal = 0;
+         document.querySelectorAll('.item-total').forEach(el => {
+           subtotal += parseFloat(el.textContent.replace('$', ''));
+         });
+         document.querySelector('#price p').textContent = `$${subtotal.toFixed(2)}`;
+       }
     </script>
   </body>
 </html>

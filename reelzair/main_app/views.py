@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Cart, CartItem, Order
+from django.http import JsonResponse
 from django.utils import timezone
 from decimal import Decimal
+from django.views import View
 
 def get_or_create_cart(request):
     cart_id = request.session.get('cart_id')
@@ -35,6 +37,9 @@ def cart(request):
         total = Decimal('0.00')
 
     return render(request, 'cart.html', {'cart': items, 'total': total})
+
+
+
 
 def checkout(request):
     if request.method == 'POST':
@@ -95,3 +100,26 @@ def checkout_success(request):
             pass
 
     return render(request, 'checkout_success.html', {'order': order})
+
+class CartItemUpdateView(View):
+    def post(self, request, *args, **kwargs):
+        item_id = kwargs['pk']
+        action = request.POST.get('action')
+        item = CartItem.objects.get(pk=item_id)
+
+
+        if action == 'decrease' and item.quantity > 1:
+            item.quantity -= 1
+        elif action == 'increase':
+            item.quantity += 1
+
+        item.save()
+        item_total = float(item.item_total())
+        return JsonResponse({'quantity': item.quantity, 'item_total': item_total})
+
+
+class CartItemDeleteView(View):
+    def post(self, request, *args, **kwargs):
+        item = CartItem.objects.get(pk=kwargs['pk'])
+        item.delete()
+        return JsonResonse({'deleted': True})

@@ -443,6 +443,19 @@ main {
   padding: 1.25rem;
 }
 
+.product-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.product-img {
+  width: 10px;
+  height: auto;
+  object-fit: contain;
+}
+
+
 @media (max-width: 600px) {
   .form-row {
     flex-direction: column;
