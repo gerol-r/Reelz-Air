@@ -13,5 +13,6 @@ urlpatterns = [
     path('cart/', views.cart, name='cart'),
     path('product/', views.product, name='product'),
     path('confirmation/', views.confirmation, name='confirmation'),
-    path('figma/', views.figma, name='figma')
+    #path('figma/', views.figma, name='figma')
+    path('add-to-cart/', views.add_to_cart, name='add_to_cart'),
 ]

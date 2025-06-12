@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Cart, CartItem, Order
 from django.http import JsonResponse
 from django.utils import timezone
 from decimal import Decimal
 from django.views import View
+from django.views.decorators.csrf import csrf_exempt
+from .models import Cart, CartItem, Order, Product
 
 def get_or_create_cart(request):
     cart_id = request.session.get('cart_id')
@@ -22,6 +23,9 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+def product(request):
+    return render(request, 'product.html')
+
 def print_label(request):
     return render(request, 'print_label.html')
 
@@ -37,9 +41,6 @@ def cart(request):
         total = Decimal('0.00')
 
     return render(request, 'cart.html', {'items': items, 'total': total})
-
-
-
 
 def checkout(request):
     if request.method == 'POST':
@@ -135,3 +136,47 @@ class CartItemDeleteView(View):
 
         item.delete()
         return JsonResponse({'deleted': True})
+    
+def confirmation(request):
+    return render(request, 'confirmation.html')
+
+@csrf_exempt
+def add_to_cart(request):
+    if request.method == 'POST':
+        try:
+            # Get or create cart
+            cart_id = request.session.get('cart_id')
+            if not cart_id:
+                cart = Cart.objects.create()
+                request.session['cart_id'] = cart.id
+            else:
+                cart = Cart.objects.get(id=cart_id)
+            
+            # Get first product (assuming it's ReelzAir)
+            product = Product.objects.first()
+            if not product:
+                return JsonResponse({
+                    'success': False, 
+                    'error': 'Product not found'
+                }, status=404)
+            
+            # Create cart item with product
+            CartItem.objects.create(
+                cart=cart,
+                product=product,
+                quantity=1
+            )
+            
+            return JsonResponse({'success': True})
+            
+        except Exception as e:
+            print(f"Error adding to cart: {str(e)}")
+            return JsonResponse({
+                'success': False, 
+                'error': str(e)
+            }, status=500)
+            
+    return JsonResponse({
+        'success': False, 
+        'error': 'Invalid request method'
+    }, status=400)

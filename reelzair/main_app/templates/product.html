@@ -1,6 +1,7 @@
 {% extends 'base.html' %} {% load static %} {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/product.css' %}" />
 {% endblock %} {% block content %}
+{% csrf_token %}
 <main class="product-container">
   <!-- Hero Section -->
   <section class="hero-section">
@@ -9,11 +10,11 @@
         src="{% static 'images/product/product.png' %}"
         alt="ReelzAir Purifier"
       />
-      <button class="cta-button">Buy Now</button>
     </div>
   </section>
 
-  <button class="hero-buy-button">
+ <!-- Replace the existing hero buy button -->
+<button class="hero-buy-button" onclick="document.getElementById('customize').scrollIntoView({behavior: 'smooth'})">
   <div class="buy-now">Buy Now</div>
 </button>
 
@@ -205,39 +206,47 @@
    <div class="customize-image">
   <img src="{% static 'images/product/customize.png' %}" alt="Customize">
 </div>
-<section class="customize-section">
+<!-- Replace the existing customize section opening tag -->
+<section class="customize-section" id="customize">
   <div class="h2">
-    <b class="customize-your-reelzair">Customize Your ReelzAir</b>
-  </div>
-  <div class="customize-options">
-    <div class="color-group">
-      <div class="label">
-        <div class="select-color">Select Color</div>
-      </div>
-      <div class="color-buttons">
-        <button class="button green"></button>
-        <button class="button blue"></button>
-        <button class="button navy"></button>
-      </div>
-    </div>
-    <div class="power-group">
-  <div class="label">
-    <div class="power-source">Power Source</div>
-  </div>
-  <select class="select">
-    <option value="ac">Wall Plug (AC)</option>
-    <option value="usb">USB-C</option>
-    <option value="battery">Battery Pack</option>
-  </select>
-</div>
+    <b class="customize-your-reelzair">Buy ReelzAir</b>
   </div>
   <div class="price-container">
     <b class="price">$199.99</b>
   </div>
-  <div class="buy-button">
+  <button class="buy-button" onclick="addToCart()">
     <div class="buy-now">Buy Now</div>
-  </div>
+  </button>
 </section>
-</main>
+
+<script>
+function addToCart() {
+  fetch('/add-to-cart/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+    }
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+    if (data.success) {
+      window.location.href = '/cart/';
+    } else {
+      console.error('Error:', data.error);
+      alert('Failed to add item to cart');
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('Failed to add item to cart');
+  });
+}
+</script>
 
 {% endblock %}

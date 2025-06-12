@@ -3,18 +3,12 @@ from decimal import Decimal
 
 
 class Product(models.Model):
-    PRODUCT_CHOICES = [
-        ('filtration_system', 'ReelzAir Purifier'),
-        ('filter_replacement', 'ReelzAir Filter Replacement'),
-    ]
-
-    product = models.CharField(max_length=50, choices=PRODUCT_CHOICES, unique=True, default='filtration_system')
-
-    price = models.DecimalField(max_digits=8, decimal_places=2)
-    eco_bricks = models.PositiveIntegerField(default=0)
+    product = models.CharField(max_length=100)  # Changed from 'name'
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    description = models.TextField(blank=True)  # Made optional since it's not in your original model
 
     def __str__(self):
-        return dict(self.PRODUCT_CHOICES).get(self.product, self.product)
+        return self.product
 
 class Cart(models.Model):
     contact_name = models.CharField(max_length=100)
