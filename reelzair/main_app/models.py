@@ -1,5 +1,20 @@
 from django.db import models
+from decimal import Decimal
 
+
+class Product(models.Model):
+    PRODUCT_CHOICES = [
+        ('filtration_system', 'ReelzAir Purifier'),
+        ('filter_replacement', 'ReelzAir Filter Replacement'),
+    ]
+
+    product = models.CharField(max_length=50, choices=PRODUCT_CHOICES, unique=True, default='filtration_system')
+
+    price = models.DecimalField(max_digits=8, decimal_places=2)
+    eco_bricks = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return dict(self.PRODUCT_CHOICES).get(self.product, self.product)
 
 class Cart(models.Model):
     contact_name = models.CharField(max_length=100)
@@ -8,20 +23,23 @@ class Cart(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     is_checked_out = models.BooleanField(default=False)
 
-    filtration_system_quantity = models.PositiveIntegerField(default=0)
-    filter_replacement_quantity = models.PositiveIntegerField(default=0)
-
     def total_price(self):
-        system_price = 129.99  
-        filter_price = 11.99
-
-        return (self.filtration_system_quantity * system_price) + \
-               (self.filter_replacement_quantity * filter_price)
-
+        return sum(item.item_total() for item in self.items.all())
+        
     def __str__(self):
-        return f"Cart #{self.id} for {self.contact_name}"
+        return f"Cart #{self.id}"
     
 
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    
+    def item_total(self):
+        return self.product.price * Decimal(self.quantity)
+
+    def __str__(self):
+        return f"{self.quantity} x {self.product.product}"
 
 class Order(models.Model):
     cart = models.OneToOneField(Cart, on_delete=models.CASCADE)

@@ -8,7 +8,7 @@
   </section>
 
   <!-- Additional Public Info Section -->
-  <section class="info" style="padding: 2rem 1rem">
+  <!-- <section class="info" style="padding: 2rem 1rem">
     <div class="card" id="blue-card">
       <h2>Breathe Bold with ReelzAir</h2>
       <p>Eco-Brick Program</p>
@@ -18,7 +18,43 @@
       </p>
       <button class="cta-button">Explore</button>
     </div>
-  </section>
+  </section> -->
+
+<section class="about" id="app-features" style="padding: 2rem 1rem">
+  <div class="flip-container" id="reelzair-card">
+    <div class="flip-inner">
+      <!-- Front Face -->
+      <div class="flip-front">
+        <div class="card" id="blue-card">
+          <h2>Breathe Bold with ReelzAir</h2>
+          <p>Eco-Brick Program</p>
+          <p>
+            Turn single-use bottles into building blocks for good! Join our
+            community to upcycle plastics into real change.
+          </p>
+          <button class="cta-button" onclick="flipReelzAirCard()">Explore</button>
+        </div>
+      </div>
+      
+      <!-- Back Face -->
+      <div class="flip-back">
+        <div class="card" id="yellow-card">
+          <h2>Why Choose ReelzAir?</h2>
+          <div class="back-content">
+            <ol>
+              <li>Sustainable air purification technology</li>
+              <li>Reduces plastic waste in our environment</li>
+              <li>Community-driven environmental impact</li>
+              <li>Easy-to-use eco-friendly solutions</li>
+            </ol>
+            <p>Join thousands making a difference, one breath at a time.</p>
+          </div>
+          <button class="alt-cta-button" onclick="flipReelzAirCard()">← Back to Info</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
   <!-- Additional Features Section -->
   <section class="features-section" style="padding: 2rem 1rem">
@@ -61,26 +97,49 @@
   </section>
 
   <!-- Eco-Brick Overview Section -->
-  <section class="info" style="padding: 2rem 1rem">
-    <div class="card" id="blue-card">
-      <img src="{% static 'images/home/eco-brick.png'%}" alt="" />
-      <h2>Eco-Brick Program</h2>
-      <p>
-        Turn single-use bottles into building blocks for good! Join our
-        community to upcycle plastics into real change.
-      </p>
-      <button class="alt-cta-button">How it Works</button>
+  <section class="info" id="eco-brick" style="padding: 2rem 1rem">
+      <div class="flip-container" id="eco-card">
+    <div class="flip-inner">
+      <!-- Front Face -->
+      <div class="flip-front">
+        <div class="card" id="blue-card">
+          <img src="{% static 'images/home/eco-brick.png'%}" alt="Eco-Brick" />
+          <h2>Eco-Brick Program</h2>
+          <p>
+            Turn single-use bottles into building blocks for good! Join our
+            community to upcycle plastics into real change.
+          </p>
+          <p>
+            Every eco-brickkeeps plastic out of landfills and builds a cleaner future.
+          </p>
+          <button class="cta-button" onclick="flipEcoCard('reelzair-card')">How it Works</button>
+        </div>
+      </div>
+      
+      <!-- Back Face -->
+      <div class="flip-back">
+        <div class="card" id="yellow-card">
+          <h2>How It Works</h2>
+          <img src="{% static 'images/home/eco-brick.png'%}" alt="Eco-Brick" />
+          <div class="back-content">
+            <ol>
+              <li>Clean a plastic bottle</li>
+              <li>Stuff with dry plastic strips</li>
+              <li>Weighit & cap it tight</li>
+              <li>Deliver or reuse it in builds</li>
+            </ol>
+            <a href="/printlabel" target="_blank" rel="noopener noreferrer">Download Shipping Label</a>
+          </div>
+          <button class="alt-cta-button" onclick="flipEcoCard('reelzair-card')">← Back to Info</button>
+        </div>
+      </div>
     </div>
+  </div>
   </section>
   <!-- Dashboard Example Section -->
   <section class="db" style="padding: 2rem 1rem">
     <div class="db-card">
       <img src="{% static 'images/home/dashboard-example.svg'%}" alt="" />
-      <!-- <div class="metrics-card-content">
-      <h4>
-        Control and track your purifier from anywhere.
-      </h4>
-      </div> -->
     </div>
   </section>
   <!-- More Info Section -->
@@ -106,4 +165,27 @@
     <!-- </div> -->
   </section>
 </main>
+<script>
+        function flipEcoCard() {
+            const card = document.getElementById('eco-card');
+            card.classList.toggle('flipped');
+        }
+        function flipReelzAirCard() {
+    const card = document.getElementById('reelzair-card');
+    card.classList.toggle('flipped');
+    
+    // Adjust height after flip
+    setTimeout(() => {
+        if (card.classList.contains('flipped')) {
+            // When showing back, let it expand
+            const backContent = card.querySelector('.flip-back');
+            const backHeight = backContent.scrollHeight;
+            card.style.height = backHeight + 'px';
+        } else {
+            // When showing front, use smaller height
+            card.style.height = '220px';
+        }
+    }, 50); // Small delay to ensure flip has started
+}
+    </script>
 {% endblock %}

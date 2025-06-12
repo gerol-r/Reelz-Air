@@ -1,77 +1,93 @@
-{% extends 'base.html' %} {% load static %} {% block head %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
 <link rel="stylesheet" href="{% static 'css/cart.css' %}" />
-{% endblock %} {% block content %}
+{% endblock %}
+
+{% block content %}
+<section class="cart">
 <h1 class="carttitle">Your ReelzAir Cart</h1>
-<section class="card">
-    <div class="cart-icon-container">
-        <div class="card" id="white-card">
-            <div class="cart-item-info">
-                <div>
-                    <img
-                     src="{% static 'images' %}"
-                     alt="Deep Blue Purifier">
-                </div>
-                <div>
-                    <h3>ReelzAir Purifier - Deep Blue</h3>
-                    <p>Made with 3 eco-bricks</p>
-                </div>
-            </div>
-        </div>
+
+{% if items %}
+  {% for item in items %}
+    <div class="cart-item card">
+      <img src="{% static 'images/shoppingcart/'|add:item.product.product|add:'.svg' %}" alt="{{ item.product.name }}">
+      <h3>{{ item.product.name }}</h3>
+      <p>Quantity: <span class="quantity">{{ item.quantity }}</span></p>
+      <p class="item-total">Total: ${{ item.item_total }}</p>
+
+      <button class="increase" data-id="{{ item.id }}">+</button>
+      <button class="decrease" data-id="{{ item.id }}">−</button>
+      <button class="delete-item" data-id="{{ item.id }}">Remove</button>
     </div>
-    <div class="cart-icon-container">
-        <div class="card" id="white-card">
-            <div class="cart-item-info">
-                <div>
-                    <img
-                     src="{% static 'images' %}"
-                     alt="Deep Blue Purifier">
-                </div>
-                <div>
-                    <h3>ReelzAir Purifier - Lime Green</h3>
-                    <p>Made with 3 eco-bricks</p>
-                </div>
-                <div>
-                    <h4> - 1 +  $199 </h4>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="price-card">
-      <div class="shipping-info">
-        <div class="form-row">
-          <img
-            src="{% static 'images/checkout/leaf.png' %}"
-            alt="Leaf Icon"
-            />
-          <h3>Subtotal</h3>
-        </div>
-        <div>$399</div>
-    </div>
-         <div class="form-row">
-          <img
-            src="{% static 'images/checkout/leaf.png' %}"
-            alt="Leaf Icon"
-            />
-          <h3>Subtotal</h3>
-          <div>$399</div>
-        </div>
-         </div>
-    </div>
-    </div>
+  {% endfor %}
+
+  <div id="price">
+    <h3>Subtotal: ${{ total }}</h3>
   </div>
 
-
-<div class="buttons-container">
-<button class="cta-button">Proceed to Checkout</button>
-<button class="cta-button2">Continue Shopping</button>
-</div>
-</div>
-
-    
-      
-    
-
+  <div class="buttons-container">
+    <a href="{% url 'checkout' %}" class="cta-button">Proceed to Checkout</a>
+    <a href="{% url 'home' %}" class="cta-button2">Continue Shopping</a>
+  </div>
+  
+  {% else %}
+  <p>Your cart is empty.</p>
+{% endif %}
+{% endblock %}
 </section>
 
+{% block extra_js %}
+<script>
+  document.querySelectorAll(".increase, .decrease").forEach((button) => {
+    button.addEventListener("click", function () {
+      const itemId = this.dataset.id;
+      const action = this.classList.contains("increase") ? "increase" : "decrease";
 
+      fetch(`/cart/item/${itemId}/update/`, {
+        method: "POST",
+        headers: {
+          "X-CSRFToken": "{{ csrf_token }}",
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({ action }),
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        this.parentElement.querySelector(".quantity").textContent = data.quantity;
+        this.parentElement.querySelector(".item-total").textContent = `$${data.item_total.toFixed(2)}`;
+        updateSubtotal();
+      });
+    });
+  });
+
+  document.querySelectorAll(".delete-item").forEach((button) => {
+    button.addEventListener("click", function () {
+      const itemId = this.dataset.id;
+      fetch(`/cart/item/${itemId}/delete/`, {
+        method: "POST",
+        headers: {
+          "X-CSRFToken": "{{ csrf_token }}",
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.deleted) {
+          this.closest(".cart-item").remove();
+          updateSubtotal();
+        }
+      });
+    });
+  });
+
+  function updateSubtotal() {
+    let subtotal = 0;
+    document.querySelectorAll(".item-total").forEach((el) => {
+      subtotal += parseFloat(el.textContent.replace(/[^0-9.]/g, ""));
+    });
+    document.querySelector("#price p").textContent = `$${subtotal.toFixed(2)}`;
+  }
+</script>
 {% endblock %}
