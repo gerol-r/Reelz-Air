@@ -1,0 +1,243 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/product.css' %}" />
+{% endblock %} {% block content %}
+<main class="product-container">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="product-image">
+      <img
+        src="{% static 'images/product/product.png' %}"
+        alt="ReelzAir Purifier"
+      />
+      <button class="cta-button">Buy Now</button>
+    </div>
+  </section>
+
+  <button class="hero-buy-button">
+  <div class="buy-now">Buy Now</div>
+</button>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <div class="feature-grid">
+      <article class="feature-card">
+        <img
+          src="{% static 'images/product/reusable-filter.svg' %}"
+          alt="Reusable Filter Icon"
+        />
+        <h3>Reusable Filter</h3>
+      </article>
+      <article class="feature-card">
+        <img
+          src="{% static 'images/product/quiet-mode.svg' %}"
+          alt="Ultra Quiet Mode Icon"
+        />
+        <h3>Ultra-Quiet Mode</h3>
+      </article>
+      <article class="feature-card">
+        <img
+          src="{% static 'images/product/air-quality.svg' %}"
+          alt="Smart Air Quality Icon"
+        />
+        <h3>Smart Air Quality</h3>
+      </article>
+      <article class="feature-card">
+        <img
+          src="{% static 'images/product/power.svg' %}"
+          alt="Multiple Power Icon"
+        />
+        <h3>Multiple Power</h3>
+      </article>
+    </div>
+  </section>
+
+  <!-- Specs Section -->
+  <section class="specs-section">
+  <h2>Specs & Compatibility</h2>
+  <div class="specs-grid">
+    <!-- Size Spec -->
+    <div class="spec-item">
+      <div class="spec-content">
+        <img class="spec-icon" src="{% static 'images/product/size.svg' %}" alt="">
+        <div class="spec-label">Size</div>
+      </div>
+      <div class="spec-value">10.5" x 7.5" x 7.5"</div>
+    </div>
+
+    <!-- Power Spec -->
+    <div class="spec-item">
+      <div class="spec-content">
+        <img class="spec-icon" src="{% static 'images/product/power.svg' %}" alt="">
+        <div class="spec-label">Power</div>
+      </div>
+      <div class="spec-value">USB-C / AC Adapter</div>
+    </div>
+
+    <!-- Noise Spec -->
+    <div class="spec-item">
+      <div class="spec-content">
+        <img class="spec-icon" src="{% static 'images/product/noise.svg' %}" alt="">
+        <div class="spec-label">Noise</div>
+      </div>
+      <div class="spec-value"><28dB (Ultra Quiet)</div>
+    </div>
+
+    <!-- Warranty Spec -->
+    <div class="spec-item">
+      <div class="spec-content">
+        <img class="spec-icon" src="{% static 'images/product/warranty.svg' %}" alt="">
+        <div class="spec-label">Warranty</div>
+      </div>
+      <div class="spec-value">2 years</div>
+    </div>
+  </div>
+</section>
+
+<button class="care-button">
+  <img class="i-icon" alt="" src="{% static 'images/product/info.svg' %}">
+  <div class="care-instructions">Care Instructions</div>
+</button>
+
+<!-- How It Works Section -->
+<section class="how-it-works-section">
+  <h2>How It Works</h2>
+  <div class="steps-container">
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-title">Step 1: Intake</div>
+      </div>
+      <div class="step-content">
+        <img class="step-icon" alt="" src="{% static 'images/product/intake.svg' %}">
+        <div class="step-description">Pulls air in</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-title">Step 2: Purify</div>
+      </div>
+      <div class="step-content">
+        <img class="step-icon" alt="" src="{% static 'images/product/purify.svg' %}">
+        <div class="step-description">Filters pollutants</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-title">Step 3: Clean Air</div>
+      </div>
+      <div class="step-content">
+        <img class="step-icon" alt="" src="{% static 'images/product/clean.svg' %}">
+        <div class="step-description">Removes odors & allergens</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-title">Step 4: Breathe Easy!</div>
+      </div>
+      <div class="step-content">
+        <img class="step-icon" alt="" src="{% static 'images/product/breathe.svg' %}">
+        <div class="step-description">Releases fresh air</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <div class="sound-level-image">
+  <img src="{% static 'images/product/sound.png' %}" alt="Sound Level Comparison">
+</div>
+
+  <section class="sound-comparison">
+  <div class="comparison-cards">
+    <div class="comparison-card">
+      <img class="sound-icon" alt="" src="{% static 'images/product/tv.png' %}">
+      <div class="sound-info">
+        <div class="sound-title">TV Playing</div>
+        <div class="sound-level">70 dB · Loud</div>
+      </div>
+    </div>
+
+    <div class="comparison-card">
+      <img class="sound-icon" alt="" src="{% static 'images/product/laptop.png' %}">
+      <div class="sound-info">
+        <div class="sound-title">Laptop Fan</div>
+        <div class="sound-level">40 dB · Soft</div>
+      </div>
+    </div>
+
+    <div class="comparison-card">
+      <img class="sound-icon" alt="" src="{% static 'images/product/leaves.png' %}">
+      <div class="sound-info">
+        <div class="sound-title">Rustling Leaves</div>
+        <div class="sound-level">30 dB · Whisper</div>
+      </div>
+    </div>
+
+    <div class="comparison-card highlighted">
+  <img class="sound-icon" alt="" src="{% static 'images/product/reelzair.png' %}">
+  <div class="sound-info">
+    <div class="sound-title">ReelzAir Purifier</div>
+    <div class="sound-level">28 dB ·</div>
+  </div>
+  <div class="quietest-badge">
+    <img class="i-icon" alt="" src="{% static 'images/product/star.svg' %}">
+    <div class="quietest">Quietest!</div>
+  </div>
+</div>
+</section>
+
+<!-- Coverage Area Section -->
+<section class="coverage-area">
+  <div class="coverage-container">
+    <img class="coverage-image" alt="Room Coverage" src="{% static 'images/product/room.png' %}">
+    <div class="coverage-overlay">
+      <div class="coverage-circle"></div>
+      <div class="coverage-badge">
+        <img class="badge-icon" alt="" src="{% static 'images/product/size_dark.svg' %}">
+        <div class="badge-text">Cleans up to 300 sq ft</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Customize Section -->
+   <div class="customize-image">
+  <img src="{% static 'images/product/customize.png' %}" alt="Customize">
+</div>
+<section class="customize-section">
+  <div class="h2">
+    <b class="customize-your-reelzair">Customize Your ReelzAir</b>
+  </div>
+  <div class="customize-options">
+    <div class="color-group">
+      <div class="label">
+        <div class="select-color">Select Color</div>
+      </div>
+      <div class="color-buttons">
+        <button class="button green"></button>
+        <button class="button blue"></button>
+        <button class="button navy"></button>
+      </div>
+    </div>
+    <div class="power-group">
+  <div class="label">
+    <div class="power-source">Power Source</div>
+  </div>
+  <select class="select">
+    <option value="ac">Wall Plug (AC)</option>
+    <option value="usb">USB-C</option>
+    <option value="battery">Battery Pack</option>
+  </select>
+</div>
+  </div>
+  <div class="price-container">
+    <b class="price">$199.99</b>
+  </div>
+  <div class="buy-button">
+    <div class="buy-now">Buy Now</div>
+  </div>
+</section>
+</main>
+
+{% endblock %}

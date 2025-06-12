@@ -1,0 +1,308 @@
+/* Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+/* Main Container */
+.confirmation-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 16px 0;
+}
+
+/* Common Card Styles */
+.card {
+  width: 100% !important;
+  max-width: none !important;
+  background-color: #fff;
+  border: 3px solid #242e7a;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+/* Success Banner Section */
+.success-banner {
+  width: 100%;
+  border-radius: 16px;
+  background: linear-gradient(-1.33deg, #87e6e0, #fcee21);
+  border: 3px solid #242e7a;
+  padding: 28px;
+  margin-bottom: 20px;
+}
+
+.success-content {
+  text-align: center;
+}
+
+.success-icon {
+  border-radius: 9999px;
+  width: 112px;
+  height: 112px;
+  margin-bottom: 16px;
+}
+
+.success-title {
+  font-size: 24px;
+  letter-spacing: -1.1px;
+  line-height: 24px;
+  color: #242e7a;
+  margin-bottom: 8px;
+}
+
+.success-message {
+  font-size: 18px;
+  line-height: 18px;
+  color: #181818;
+}
+
+/* Order Details Section */
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.order-number {
+  font-size: 16px;
+  line-height: 16px;
+  color: #242e7a;
+}
+
+/* Offset Badge */
+.offset-badge {
+  display: flex;
+  align-items: center;
+  background-color: #a6f41d;
+  border: 2px solid #000;
+  border-radius: 9999px;
+  padding: 6px 12px;
+}
+
+.offset-icon {
+  width: 12px;
+  height: 12px;
+  margin-right: 8px;
+}
+
+.offset-text {
+  font-size: 12px;
+  color: #000;
+}
+
+/* Product Summary */
+.product-summary {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.product-image {
+  width: 56px;
+  height: 56px;
+  background-color: #87e6e0;
+  border: 3px solid #242e7a;
+  border-radius: 12px;
+  box-shadow: 0 4px 0 #242e7a;
+  box-sizing: content-box;
+  padding: 12px;
+  overflow: hidden;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px; /* Slightly smaller than container to account for padding */
+  object-fit: cover; /* This ensures the image covers the area without distortion */
+}
+
+/* Product Summary */
+.product-summary {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.product-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 86px; /* Changed to match desired height */
+  padding: 8px 0; /* Added padding top and bottom for even spacing */
+}
+
+.product-name {
+  font-size: 16px;
+  line-height: 16px;
+  color: #242e7a;
+  margin: 0;
+  text-align: left;
+}
+
+.product-variant,
+.product-quantity {
+  font-size: 14px;
+  line-height: 14px;
+  color: #181818;
+  margin: 0;
+  text-align: left;
+}
+
+.product-price {
+  font-size: 18px;
+  line-height: 18px;
+  color: #242e7a;
+  text-align: right;
+  align-self: center;
+  padding-top: 8px; /* Added to vertically center with taller product-info box */
+}
+
+/* Shipping Info Section */
+.shipping-info {
+  text-align: left;
+}
+
+.shipping-header {
+  font-size: 16px;
+  color: #242e7a;
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+.shipping-recipient {
+  margin-bottom: 4px;
+}
+
+.shipping-address {
+  margin-bottom: 16px;
+}
+
+.shipping-address p {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #181818;
+  margin: 0;
+  text-align: left;
+}
+
+.delivery-estimate {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.delivery-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 9999px;
+  border: 2px solid #000000;
+  background-color: #A6F41D;
+  padding: 6px;
+}
+
+.estimate-text {
+  font-size: 14px;
+  line-height: 14px;
+  color: #181818;
+}
+
+.estimate-date {
+  color: #181818;
+}
+
+/* Impact Message Section */
+.impact-message {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.impact-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+}
+
+.impact-text {
+  flex-grow: 1;
+}
+
+.impact-text p {
+  font-size: 16px;
+  line-height: 16px;
+  color: #242e7a;
+  margin: 0;
+}
+
+/* Blue Card Variant */
+#blue-card {
+  background-color: #87e6e0;
+}
+
+/* Action Buttons Section */
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding: 0;
+}
+
+/* Common Button Styles */
+.action-buttons .track-order,
+.action-buttons .return-home {
+  width: 100%;
+  position: relative;
+  border-radius: 9999px;
+  padding: 16px 24px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 16px;
+  height: 52px; /* Set explicit height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Track Order Button - Inverted Colors */
+.action-buttons .track-order {
+  background-color: #242e7a;
+  border: 3px solid #a6f41d;
+  color: #fff;
+}
+
+/* Return Home Button - CTA Style */
+.action-buttons .return-home {
+  background-color: #a6f41d;
+  border: 3px solid #242e7a;
+  color: #242e7a;
+}
+
+/* Eco-Brick Footer */
+.eco-brick-footer {
+  width: 100%;
+  background-color: #BDC0D7 !important;
+  border: 3px solid #181818;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 2px 5px 0px #242e7a;
+}
+
+.eco-brick-title {
+  font-size: 16px;
+  color: #242e7a;
+  margin-bottom: 8px;
+}
+
+.eco-brick-cta {
+  font-size: 16px;
+  color: #242e7a;
+  text-decoration: underline;
+  cursor: pointer;
+}

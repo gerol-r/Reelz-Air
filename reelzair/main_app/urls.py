@@ -6,4 +6,7 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('checkout/', views.checkout, name='checkout'),
     path('cart/', views.cart, name='cart'),
+    path('product/', views.product, name='product'),
+    path('confirmation/', views.confirmation, name='confirmation'),
+    path('figma/', views.figma, name='figma')
 ]
