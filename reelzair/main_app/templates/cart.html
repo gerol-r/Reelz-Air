@@ -1,205 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
 
-{% extends 'base.html' %} {% load static %} 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ReelzAir - Clean Air, Pure World</title>
-    <link rel="stylesheet" href="{% static 'css/cart.css' %}" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    {% block head %}{% endblock %}
-  </head>
-  <body>
-    <header>
-      <div class="header-container">
-        <!-- Logo -->
-        <div class="logo">
-          <a href="/"
-            ><img
-              src="{% static 'images/reelzair-logo.svg' %}"
-              alt="ReelzAir Logo"
-          /></a>
-        </div>
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %}" />
+{% endblock %}
 
-        <!-- Right side container -->
-        <div class="header-right">
-          <!-- Hamburger button (initially showing hamburger bars) -->
-          <button id="menuToggle" class="hamburger-menu" onclick="toggleMenu()">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-          </button>
-          <!-- Shopping Cart Icon -->
-          <div id="cartIcon" class="cart-icon-container">
-            <a href="/cart">
-              <img src="{% static 'images/cart.svg' %}" alt="Cart Icon" />
-            </a>
-          </div>
-        </div>
-      </div>
-      <!-- Navigation menu (hidden by default) -->
-      <nav class="nav-links" id="nav-links">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/cart">My Cart</a></li>
-          <li><a href="/#app-features">App Features</a></li>
-          <li><a href="/#eco-brick">Eco-Brick Program</a></li>
-          <li>Shop</li>
-          <li style="color: #b7b7b7">Account</li>
-        </ul>
-      </nav>
-    </header>
-    <main>
-      {% block content %}
+{% block content %}
+<section class="cart">
 <h1 class="carttitle">Your ReelzAir Cart</h1>
-<section class="cart-section">
-    <div class="card" id="white-card">
-          <img
-            class="product-img"
-            src="{% static 'images/shoppingcart/deepblue.svg' %}"
-            alt="Deep Blue Purifier"
-          />
-        <div class="item-details">
-          <h3>ReelzAir Purifier - Deep Blue</h3>
-          <p>Made with 3 eco-bricks</p>
-          <div class="buttons-container1">
-            <button class="decrease" data-id="{{ item.id }}"><i class="fas fa-minus"></i> 
-            </button>
-            <p class="quantity">{{ item.quantity }}</p>
-            <button class="increase" data-id="{{ item.id }}"><i class="fas fa-plus"></i>
-            </button>1
-             <p class="item.total">${{ item.item.total }}</p>
-             <button class="delete-item" data-id="{{ item.id }}"><i class="fa-solid fa-trash"></i></button></div>
-        </div>
+
+{% if items %}
+  {% for item in items %}
+    <div class="cart-item card">
+      <img src="{% static 'images/shoppingcart/'|add:item.product.product|add:'.svg' %}" alt="{{ item.product.name }}">
+      <h3>{{ item.product.name }}</h3>
+      <p>Quantity: <span class="quantity">{{ item.quantity }}</span></p>
+      <p class="item-total">Total: ${{ item.item_total }}</p>
+
+      <button class="increase" data-id="{{ item.id }}">+</button>
+      <button class="decrease" data-id="{{ item.id }}">−</button>
+      <button class="delete-item" data-id="{{ item.id }}">Remove</button>
+    </div>
+  {% endfor %}
+
+  <div id="price">
+    <h3>Subtotal: ${{ total }}</h3>
   </div>
 
-    <div class="card" id="white-card">
-          <img
-            class="product-img"
-            src="{% static 'images/shoppingcart/limegreen.svg' %}"
-            alt="Lime Green Purifier"
-          />
-        <div class="item-details">
-          <h3>ReelzAir Purifier - Lime Green</h3>
-          <p>Made with 3 eco-bricks</p>
-          <div class="buttons-container1">
-            <button><i class="fas fa-minus"></i></button>
-            <p>1</p>
-            <button><i class="fas fa-plus"></i></button> 
-            <p>$129.99</p>
-            <button class="delete-item"><i class="fa-solid fa-trash"></i></button>
-          </div>
-        </div>
-  </div>
-
-  <div class="price-card">
-    <div class="price-list">
-      <div class= "price-li">
-        <div id="itemized"><p><i style="color: #a6f41d;" class="fas fa-coins"></i> Subtotal</p></div>
-        <div id="price"><p>$399</p></div>
-      </div>
-      <div class= "price-li">
-        <div id="itemized"><p><i style="color: #87e6e0 ;" class="fas fa-receipt"></i> Estimated Tax</p></div>
-        <div id="price"><p>$23.94</p></div>
-      </div>
-      <div class= "price-li">
-        <div id="itemized"><p><i style="color: #242e7a;" class="fas fa-truck"></i> Shipping</p></div>
-        <div id="price"><p>$4.99</p></div>
-      </div>
-    </div>
-    <div class="price-list">
-    </div>
-</div>
   <div class="buttons-container">
-    <button class="cta-button">Proceed to Checkout</button>
-    <button class="cta-button2">Continue Shopping</button>
+    <a href="{% url 'checkout' %}" class="cta-button">Proceed to Checkout</a>
+    <a href="{% url 'home' %}" class="cta-button2">Continue Shopping</a>
   </div>
+  
+  {% else %}
+  <p>Your cart is empty.</p>
+{% endif %}
+{% endblock %}
 </section>
-    </main>
-    <script>
-      // JavaScript to toggle the navigation menu
-      function toggleMenu() {
-        var navMenu = document.getElementById("nav-links");
-        var menuBtn = document.getElementById("menuToggle");
-        var cartIcon = document.getElementById("cartIcon");
 
-        // If the nav menu is currently shown, hide it and revert the button
-        if (navMenu.style.display === "block") {
-          navMenu.style.display = "none";
-          // Restore hamburger icon (three bars)
-          menuBtn.innerHTML =
-            '<span class="bar"></span><span class="bar"></span><span class="bar"></span>';
-          // Show the cart icon
-          if (cartIcon) cartIcon.style.display = "block";
-        } else {
-          // Show the nav menu and change the button to an X
-          navMenu.style.display = "block";
-          menuBtn.innerHTML = "X";
-          // Hide the cart icon while the menu is displayed
-          if (cartIcon) cartIcon.style.display = "none";
-        }
-      }
+{% block extra_js %}
+<script>
+  document.querySelectorAll(".increase, .decrease").forEach((button) => {
+    button.addEventListener("click", function () {
+      const itemId = this.dataset.id;
+      const action = this.classList.contains("increase") ? "increase" : "decrease";
 
-      // Javacript for dynamics
-      document.querySelectorAll('.increase, .decrease').forEach(button => {
-        button.addEventListener('click', function () {
-          const itemId = this.dataset.id;
-          const action = this.classList.contains('increase') ? 'increase' : 'decrease';
-    
-          fetch(`/cart/item/${itemId}/update/`, {
-            method: 'POST',
-            headers: {
-              'X-CSRFToken': '{{ csrf_token }}',
-              'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: new URLSearchParams({ action })
-          })
-          .then(response => response.json())
-          .then(data => {
-            this.parentElement.querySelector('.quantity').textContent = data.quantity;
-            this.parentElement.querySelector('.item-total').textContent = `$${data.item_total.toFixed(2)}`;
-            updateSubtotal(); // Optional: refresh total
-          });
-        });
+      fetch(`/cart/item/${itemId}/update/`, {
+        method: "POST",
+        headers: {
+          "X-CSRFToken": "{{ csrf_token }}",
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({ action }),
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        this.parentElement.querySelector(".quantity").textContent = data.quantity;
+        this.parentElement.querySelector(".item-total").textContent = `$${data.item_total.toFixed(2)}`;
+        updateSubtotal();
       });
+    });
+  });
 
-      document.querySelectorAll('.delete-item').forEach(button => {
-        button.addEventListener('click', function () {
-          const itemId = this.dataset.id;
-    
-          fetch(`/cart/item/${itemId}/delete/`, {
-            method: 'POST',
-            headers: {
-              'X-CSRFToken': '{{ csrf_token }}',
-              'Content-Type': 'application/x-www-form-urlencoded',
-            }
-          })
-          .then(response => response.json())
-          .then(data => {
-            if (data.deleted) {
-              this.closest('.card').remove();
-              updateSubtotal(); // Optional: refresh total
-             }
-           });
-         });
-       });
+  document.querySelectorAll(".delete-item").forEach((button) => {
+    button.addEventListener("click", function () {
+      const itemId = this.dataset.id;
+      fetch(`/cart/item/${itemId}/delete/`, {
+        method: "POST",
+        headers: {
+          "X-CSRFToken": "{{ csrf_token }}",
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.deleted) {
+          this.closest(".cart-item").remove();
+          updateSubtotal();
+        }
+      });
+    });
+  });
 
-       function updateSubtotal() {
-         let subtotal = 0;
-         document.querySelectorAll('.item-total').forEach(el => {
-           subtotal += parseFloat(el.textContent.replace('$', ''));
-         });
-         document.querySelector('#price p').textContent = `$${subtotal.toFixed(2)}`;
-       }
-    </script>
-  </body>
-</html>
-
-
+  function updateSubtotal() {
+    let subtotal = 0;
+    document.querySelectorAll(".item-total").forEach((el) => {
+      subtotal += parseFloat(el.textContent.replace(/[^0-9.]/g, ""));
+    });
+    document.querySelector("#price p").textContent = `$${subtotal.toFixed(2)}`;
+  }
+</script>
 {% endblock %}

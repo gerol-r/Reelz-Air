@@ -30,13 +30,13 @@ def cart(request):
         cart = get_or_create_cart(request)
         items = cart.items.select_related('product')  
 
-        total = sum(item.product.price * item.quantity for item in items)
+        total = cart.total_price()
     except Cart.DoesNotExist:
         cart = None
         items = []
         total = Decimal('0.00')
 
-    return render(request, 'cart.html', {'cart': items, 'total': total})
+    return render(request, 'cart.html', {'items': items, 'total': total})
 
 
 
@@ -67,7 +67,7 @@ def checkout(request):
             cart.save()
 
             items = cart.items.select_related('product')
-            total = sum(item.product.price * item.quantity for item in items)
+            total = cart.total_price()
             shipping_price = shipping_costs.get(shipping_method, Decimal('0.00'))
             full_total = total + shipping_price
 
@@ -105,7 +105,13 @@ class CartItemUpdateView(View):
     def post(self, request, *args, **kwargs):
         item_id = kwargs['pk']
         action = request.POST.get('action')
-        item = CartItem.objects.get(pk=item_id)
+
+
+        item = get_object_or_404(CartItem, pk=item_id)
+        cart = get_or_create_cart(request)
+
+        if item.cart != cart:
+            return JsonResponse({ 'error': 'Unauthorized'}, status=403)
 
 
         if action == 'decrease' and item.quantity > 1:
@@ -115,11 +121,17 @@ class CartItemUpdateView(View):
 
         item.save()
         item_total = float(item.item_total())
-        return JsonResponse({'quantity': item.quantity, 'item_total': item_total})
+        cart_total = float(item.cart.total_price())
+        return JsonResponse({'quantity': item.quantity, 'item_total': item_total, 'cart_total': cart_total})
 
 
 class CartItemDeleteView(View):
     def post(self, request, *args, **kwargs):
-        item = CartItem.objects.get(pk=kwargs['pk'])
+        item = get_object_or_404(CartItem, pk=kwargs['pk'])
+        cart = get_or_create_cart(request)
+
+        if item.cart != cart:
+            return JsonResponse({'error': 'Unauthorized'}, status=403)
+
         item.delete()
-        return JsonResonse({'deleted': True})
+        return JsonResponse({'deleted': True})
