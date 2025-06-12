@@ -3,12 +3,18 @@ from decimal import Decimal
 
 
 class Product(models.Model):
-    name = models.CharField(max_length=100)
+    PRODUCT_CHOICES = [
+        ('filtration_system', 'ReelzAir Purifier'),
+        ('filter_replacement', 'ReelzAir Filter Replacement'),
+    ]
+
+    product = models.CharField(max_length=50, choices=PRODUCT_CHOICES, unique=True, default='filtration_system')
+
     price = models.DecimalField(max_digits=8, decimal_places=2)
     eco_bricks = models.PositiveIntegerField(default=0)
 
     def __str__(self):
-        return self.name
+        return dict(self.PRODUCT_CHOICES).get(self.product, self.product)
 
 class Cart(models.Model):
     contact_name = models.CharField(max_length=100)
@@ -33,7 +39,7 @@ class CartItem(models.Model):
         return self.product.price * Decimal(self.quantity)
 
     def __str__(self):
-        return f"{self.quantity} x {self.product.name}"
+        return f"{self.quantity} x {self.product.product}"
 
 class Order(models.Model):
     cart = models.OneToOneField(Cart, on_delete=models.CASCADE)

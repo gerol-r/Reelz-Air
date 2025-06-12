@@ -134,10 +134,16 @@ footer {
 }
 
 /* Hover effect */
-.cta-button, .cta-button2:hover {
+.cta-button:hover {
   background-color: #a6f41d;
   transform: translateY(2px);
   box-shadow: 0 2px 0 #242e7a;
+}
+
+.cta-button2:hover {
+  background-color: #242e7a;
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #a6f41d;
 }
 
 /* Active/pressed effect */

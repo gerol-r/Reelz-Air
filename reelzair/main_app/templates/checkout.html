@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% load static %} {% block head %}
 <link rel="stylesheet" href="{% static 'css/checkout.css' %}" />
 {% endblock %} {% block content %}
-<main>
+{% comment %} <main> {% endcomment %}
 <section>
   <form class="card" id="white-card" method="POST" action={% url 'checkout' %}>
     {% csrf_token %}
@@ -208,7 +208,7 @@
 </div>
 </section>
 </form>
-</main>
+{% comment %} </main> {% endcomment %}
 <script>
     const baseTotal = parseFloat("{{ total|floatformat:2 }}");
 
