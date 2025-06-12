@@ -1,0 +1,102 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link rel="stylesheet" href="{% static 'css/confirmation.css' %}" />
+{% endblock %} {% block content %}
+
+<main class="confirmation-container">
+  <!-- Order Success Section -->
+  <section class="success-banner">
+    <div class="success-content">
+      <img
+        class="success-icon"
+        alt="Success Icon"
+        src="{% static 'images/confirmation/success.png'%}"
+      />
+      <h1 class="success-title">Thank you for your order!</h1>
+      <p class="success-message">Your air is about to get a lot cleaner.</p>
+    </div>
+  </section>
+
+  <!-- Order Details Section -->
+  <section class="order-details card" id="white-card">
+    <div class="order-header">
+      <h2 class="order-number">Order #RA1278</h2>
+      <div class="offset-badge">
+        <img
+          class="offset-icon"
+          alt="Offset Icon"
+          src="{% static 'images/confirmation/offset.svg'%}"
+        />
+        <span class="offset-text">Plastic Offset Included</span>
+      </div>
+    </div>
+
+  <div class="product-summary">
+  <div class="product-image">
+    <img alt="Product Image" src="{% static 'images/confirmation/product.png'%}" />
+  </div>
+      <div class="product-info">
+        <h2 class="product-name">ReelzAir Purifier Mini</h3>
+        <p class="product-variant">Color: Deep Blue</p>
+        <p class="product-quantity">Qty: 2</p>
+      </div>
+      <div class="product-price">$119</div>
+    </div>
+  </section>
+
+  <!-- Shipping Information Section -->
+  <section class="shipping-info card" id="white-card">
+    <h1 class="shipping-header">Shipping To:</h3>
+    <div class="shipping-recipient">
+      <p class="recipient-name">Samira Patel</p>
+    </div>
+    <div class="shipping-address">
+      <p>512 Greenway Ave</p>
+      <p>Washington, DC 20001</p>
+    </div>
+    <div class="delivery-estimate">
+      <img
+        class="delivery-icon"
+        alt="Delivery Icon"
+        src="{% static 'images/confirmation/delivery.svg'%}"
+      />
+      <p class="estimate-text">
+        <span>Estimated delivery:</span>
+        <span class="estimate-date">May 30 – Jun 2</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- Impact Message Section -->
+  <section class="impact-message card" id="yellow-card">
+    <img
+      class="impact-icon"
+      alt="Impact Icon"
+      src="{% static 'images/confirmation/impact.png'%}"
+    />
+    <div class="impact-text">
+      <p>You just helped recycle 3 lbs of plastic. Nice move.</p>
+    </div>
+  </section>
+
+  <!-- Action Buttons Section -->
+  <section class="action-buttons">
+    <button class="cta-button" id="homeButton">
+      <span>Return to Home</span>
+    </button>
+    <button class="track-order">
+      <span>Track My Order</span>
+    </button>
+  </section>
+
+  <!-- Eco-Brick Footer -->
+  <footer class="eco-brick-footer">
+    <div class="eco-brick-content">
+      <h3 class="eco-brick-title">Want to make your own eco-bricks?</h3>
+      <p class="eco-brick-cta" id="learnMoreLink">
+        Learn how to join the movement.
+      </p>
+    </div>
+  </footer>
+</main>
+
+{% endblock %}

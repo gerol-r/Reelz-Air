@@ -1,6 +1,7 @@
 /* Use the Fredoka Variable font from Google */
 * {
   font-family: "Fredoka", sans-serif;
+  src: url("{% static 'fonts/Fredoka.ttf' %}") format('truetype');
 }
 h1 {
   font-weight: 500;

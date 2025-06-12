@@ -11,6 +11,16 @@ def about(request):
 def checkout(request):
     return render(request, 'checkout.html')
 
-
 def cart(request):
     return render(request, 'cart.html')
+
+def product(request):
+    return render(request, 'product.html')
+
+def confirmation(request):
+    return render(request, 'confirmation.html')
+
+def figma(request):
+    # Default Figma project URL - replace with your actual Figma project URL
+    figma_url = request.GET.get('url', 'https://www.figma.com/file/YourDefaultFigmaFileID/YourDefaultFigmaFileName')
+    return render(request, 'figma.html', {'figma_url': figma_url})
