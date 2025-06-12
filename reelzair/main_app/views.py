@@ -44,51 +44,48 @@ def cart(request):
 
 def checkout(request):
     if request.method == 'POST':
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        phone = request.POST.get('phone')
-        address = request.POST.get('address')
-        city = request.POST.get('city')
-        state = request.POST.get('state')
-        zip_code = request.POST.get('zip')
-        shipping_method = request.POST.get('shipping_method')
-
-        shipping_costs = {
-            'standard': Decimal('4.99'),
-            'express': Decimal('14.99'),
-            'eco': Decimal('2.99'),
+        # Get form data
+        shipping_data = {
+            'name': request.POST.get('name'),
+            'email': request.POST.get('email'),
+            'address': request.POST.get('address'),
+            'city': request.POST.get('city'),
+            'state': request.POST.get('state'),
+            'zip': request.POST.get('zip'),
         }
-
-        try:
-            cart = get_or_create_cart(request)
-            cart.contact_name = name
-            cart.contact_email = email
-            cart.contact_phone = phone
-            cart.is_checked_out = True
-            cart.save()
-
-            items = cart.items.select_related('product')
-            total = cart.total_price()
-            shipping_price = shipping_costs.get(shipping_method, Decimal('0.00'))
-            full_total = total + shipping_price
-
-            order = Order.objects.create(
-                cart=cart,
-                total_price=full_total,
-                paid=True
-            )
-
-            request.session['order_id'] = order.id
-
-            return redirect('checkout_success')
-
-        except Cart.DoesNotExist:
-            pass  
-
-    return render(request, 'checkout.html', {
-        'total': Decimal('0.00'),
-        'shipping_price': Decimal('0.00')
-    })
+        
+        cart = Cart.objects.get(id=request.session.get('cart_id'))
+        
+        # Save shipping info to cart
+        cart.contact_name = shipping_data['name']
+        cart.contact_email = shipping_data['email']
+        cart.is_checked_out = True
+        cart.save()
+        
+        # Store data in session for confirmation page
+        request.session['order_details'] = {
+            'shipping': shipping_data,
+            'items': [{
+                'name': item.product.product,
+                'quantity': item.quantity,
+                'price': float(item.product.price)  # Changed from item.price to item.product.price
+            } for item in cart.items.all()],
+            'order_number': f"RA{timezone.now().strftime('%y%m%d%H%M')}"
+        }
+        
+        return redirect('confirmation')
+    
+    # Handle GET request
+    cart_id = request.session.get('cart_id')
+    if not cart_id:
+        return redirect('cart')
+        
+    cart = Cart.objects.get(id=cart_id)
+    context = {
+        'cart': cart,
+        'total': cart.total_price()
+    }
+    return render(request, 'checkout.html', context)
 
 def checkout_success(request):
     order_id = request.session.get('order_id')
@@ -138,7 +135,8 @@ class CartItemDeleteView(View):
         return JsonResponse({'deleted': True})
     
 def confirmation(request):
-    return render(request, 'confirmation.html')
+    order_details = request.session.get('order_details', {})
+    return render(request, 'confirmation.html', order_details)
 
 @csrf_exempt
 def add_to_cart(request):

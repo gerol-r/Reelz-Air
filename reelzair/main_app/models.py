@@ -1,11 +1,10 @@
 from django.db import models
 from decimal import Decimal
 
-
 class Product(models.Model):
-    product = models.CharField(max_length=100)  # Changed from 'name'
+    product = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=6, decimal_places=2)
-    description = models.TextField(blank=True)  # Made optional since it's not in your original model
+    description = models.TextField(blank=True)
 
     def __str__(self):
         return self.product
@@ -22,19 +21,18 @@ class Cart(models.Model):
         
     def __str__(self):
         return f"Cart #{self.id}"
-    
 
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items')
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
-    
+
     def item_total(self):
-        return self.product.price * Decimal(self.quantity)
+        return self.product.price * self.quantity
 
     def __str__(self):
         return f"{self.quantity} x {self.product.product}"
-
+    
 class Order(models.Model):
     cart = models.OneToOneField(Cart, on_delete=models.CASCADE)
     order_date = models.DateTimeField(auto_now_add=True)
