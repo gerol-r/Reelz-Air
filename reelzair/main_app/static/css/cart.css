@@ -1,411 +1,83 @@
-/* Use the Fredoka Variable font from Google */
-* {
-  font-family: "Fredoka", sans-serif;
-}
-h1 {
-  font-weight: 500;
-}
+
 .carttitle {
     display: flex;
     justify-content: center;
-    color: #fff;
+    color: rgb(9, 9, 153);
 }
-h2 {
-  font-weight: 400;
+p {
+  color: #a6f41d;
 }
-p,
-a {
-  font-weight: 300;
-}
-/* ---------- All Container Max-Widths ---------- */
-body,
-main,
-.container,
-header,
-footer {
-  max-width: 1000px;
-  margin: 0 auto;
-}
-/* ---------- Header Container ---------- */
-.header-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 20px;
-  background-color: #242e7a;
-}
-
-/* ---------- Logo Styling ---------- */
-.logo img {
-  height: 50px;
-}
-
-/* ---------- Header Right Container for Hamburger and Cart Icon ---------- */
-.header-right {
-  display: flex;
-  align-items: center;
-}
-
 main {
   background-image: url("/static/images/home/background.png");
   /* background-size: contain; */
   background-repeat: repeat-y;
   background-position: center center;
   background-size: cover;
-}
-
-/* ---------- Hamburger Menu Button ---------- */
-.hamburger-menu {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0 10px;
-  font-size: 24px; /* Used when showing 'X';*/
-  color: #a6f41d; /* Used when showing 'X';*/
-}
-.hamburger-menu .bar {
-  display: block;
-  width: 25px;
-  height: 3px;
-  background-color: #a6f41d;
-  margin: 4px 0;
-  transition: all 0.3s;
-}
-
-/* ---------- Cart Icon Container ---------- */
-.cart-icon-container {
-  padding: 0 10px;
-}
-.cart-icon-container img {
-  width: 30px;
-  height: auto;
-}
-
-/* ---------- Navigation Menu Dropdown ---------- */
-.nav-links {
-  display: none; /* Hidden by default */
-  background-color: #fff;
-  width: 100%;
-  position: absolute;
-  top: 70px;
-  left: 0;
-  z-index: 10;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-.nav-links ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.nav-links ul li {
-  padding: 10px;
-  text-align: left;
-  cursor: pointer;
-  color: #000;
-  margin-right: 50px;
-}
-/* ---------- All App Buttons  ---------- */
-.cta-button {
-  background-color: #a6f41d;
-  color: #242e7a;
-  border: 3px solid #242e7a;
-  border-radius: 35px;
-  padding: 15px 40px;
-  font-size: 18px;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
-  text-align: center;
-  transition: all 0.2s ease;
-  width: 37em;
-  height: 4em;
-  
-
-  /* Black drop shadow */
-  box-shadow: 0 4px 0 #242e7a;
-
-  /* Remove default button styling */
-  /* outline: none;
-    border: 3px solid #242E7A; */
-}
-
-.cta-button2 {
-  background-color: #242e7a;
-  color:#a6f41d;
-  border: 3px solid #a6f41d;
-  border-radius: 35px;
-  padding: 15px 40px;
-  font-size: 18px;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
-  text-align: center;
-  transition: all 0.2s ease;
-  width: 37em;
-  height: 4em;
-   
-  
-
-  /* Black drop shadow */
-  box-shadow: 0 4px 0 #242e7a;
-
-  /* Remove default button styling */
-  /* outline: none;
-    border: 3px solid #242E7A; */
-}
-
-.buttons-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding-top: 5%;
-    gap: 1rem;
-    
-    
-    
-}
-
-
-
-/* Hover effect */
-.cta-button:hover {
-  background-color: #a6f41d;
-  transform: translateY(2px);
-  box-shadow: 0 2px 0 #242e7a;
-}
-
-/* Active/pressed effect */
-.cta-button:active {
-  transform: translateY(4px);
-  box-shadow: 0 6px 0 #242e7a;
-}
-
-.cta-button2:hover {
-  background-color: #242e7a;
-  transform: translateY(2px);
-  box-shadow: 0 2px 0#a6f41d;
-}
-
-/* Active/pressed effect */
-.cta-button2:active {
-  transform: translateY(4px);
-  box-shadow: 0 6px 0 #a6f41d;
-}
-.alt-cta-button {
-  background-color: #fff;
-  color: #242e7a;
-  border: 3px solid #242e7a;
-  border-radius: 50px;
-  padding: 15px 40px;
-  font-size: 18px;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
-  text-align: center;
-  transition: all 0.2s ease;
-
-  /* Black drop shadow */
-  box-shadow: 0 4px 0 #000000;
-
-  /* Remove default button styling */
-  /* outline: none;
-    border: 3px solid #242E7A; */
-}
-
-/* Hover effect */
-.alt-cta-button:hover {
-  background-color: #fff;
-  transform: translateY(2px);
-  box-shadow: 0 2px 0 #000000;
-}
-
-/* Active/pressed effect */
-.alt-cta-button:active {
-  transform: translateY(4px);
-  box-shadow: 0 6px 0 #000000;
-}
-/* ---------- All App Cards  ---------- */
-.card {
-  background-color: #fff;
-  color: #242e7a;
-  border: 3px solid #242e7a;
-  border-radius: 20px;
-  padding: 15px 40px;
-  font-size: 18px;
-  text-decoration: none;
-  display: inline-block;
-  text-align: center;
-  box-shadow: 0 4px 0 #181e51;
-  max-width: 900px;
-  display: block;
-  margin: 2rem auto;
-}
-.card h2 {
-    text-align: left;
-}
-
-#blue-card {
-  background-color: #87e6e0;
-  box-shadow: 0 6px 0 #000000;
-}
-#yellow-card {
-  background-color: #fff7a6;
-}
-#beige-card {
-  background-color: #fffde0;
-}
-#white-card {
-  background-color: #ffffff;
-}
-
-.form-group {
-  margin-bottom: 1.5rem;
-  text-align: left;
-}
-
-.form-group label {
-  font-weight: 400;
-  display: block;
-  margin-bottom: 0.5rem;
-  padding-top: 1rem;
-}
-
-.form-group img {
-    width: .98rem;
-    height: 1.125rem;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 1.5rem;
-  border: 5px solid #242e7a;
-  border-radius: 20px;
-  box-sizing: border-box;
-  font-size: 1rem;
-  text-align: left;
-  
-}
-
-/* Layout for multiple inputs in a row */
-.form-row {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 92vh;
   gap: 1rem;
 }
 
-/* Size adjustments for different field widths */
-.form-group.half {
-  flex: 1 1 48%;
-}
-
-.form-group.quarter {
-  flex: 1 1 23%;
-}
-
-.shipping-options {
-  padding: 2rem 1rem;
-  text-align: center;
-}
-
-/* Heading styling (optional override) */
-.shipping-options h2 {
-  font-size: 2rem;
-  color: #242e7a;
-  margin-bottom: 2rem;
-  font-weight: 400;
-}
-
-/* Container now stacks children vertically */
-.shipping-card-container {
+.cart {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  align-items: center; /* center horizontally */
-}
-
-/* Each card stacked with full width, like your other cards */
-.shipping-card {
-  width: 100%;
-  max-width: 900px;
+  background-color: transparent;
+  width: 90%;
+  height: auto;
+  padding-bottom: 1rem;
+  /* border: 2px solid darkblue; */
   border-radius: 20px;
-  padding: 2rem;
-  box-shadow: 0 4px 0 #181e51;
-  border: 3px solid #242e7a;
-  font-size: 1rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  color: #242e7a;
-  text-align: left;
-  background-color: #ffffff;
-}
-
-#shipping h2 {
-    margin-top: 0;
-    text-align: start;
-}
-
-.shipping-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* Hover effect */
-.shipping-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 0 #181e51;
-  cursor: pointer;
-}
-
-
-
-/* Custom colors (same as before) */
-#standard-card {
-  background-color: #fffde0;
-}
-
-.price-card {
-  border: 5px solid #87e6e0;
-  border-radius: 12px;         
-  padding: 20px;              
-  margin: 20px;                
-  background-color: #f9f9f9;  
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-
-}
-
-#express-card {
-  background-color: #fff7a6;
-}
-
-#eco-card {
-  background-color: #87e6e0;
-}
-
-.payment-section {
-  padding: 2rem 1rem;
   text-align: center;
+  gap: .75rem;
+  overflow-y: hidden;
 }
 
-.payment-section h2 {
-  font-size: 2rem;
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  background-color: transparent;
+  width: 50%;
+  border-radius: 20px;
+  text-align: center;
+  gap: 1rem;
+}
+
+.buttons-container a {
+  height: 20%;
+  padding: 1rem;
+  font-size: small;
+}
+
+.cart-item {
+  margin: 0 auto;
+  width: 50%;
+  border: 2px solid darkblue;
+  border-radius: 2rem;
+  gap: 1rem;
+  font-size: small;
+  background-color: #242e7a;
+  color: #a6f41d;
+}
+/* .cart-item p {
+  color: 
+  #a6f41d;
+} */
+
+.cart-item img {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 1rem;
+}
+
+.cart-item button {
+  /* border: 5px solid blue; */
+  border-radius: 10px;
+  background-color: #a6f41d;
   color: #242e7a;
-  margin-bottom: 2rem;
-  font-weight: 400;
-  text-align: start;
-}
-
-#credit-card {
-  background-color: #fffde0; 
-  max-width: 900px;
-  margin: 0 auto 2rem auto;
-  text-align: left;
-  box-shadow: 0 4px 0 #181e51;
-}
-
-#credit-card input {
-  font-family: "Fredoka", sans-serif;
-  font-size: 1rem;
-  padding: 1.25rem;
 }
