@@ -1,15 +1,14 @@
-
 .carttitle {
     display: flex;
     justify-content: center;
     color: rgb(9, 9, 153);
 }
 p {
-  color: #a6f41d;
+  color: #242e7a;;
 }
 main {
   background-image: url("/static/images/home/background.png");
-  /* background-size: contain; */
+  background-size: contain;
   background-repeat: repeat-y;
   background-position: center center;
   background-size: cover;
@@ -24,7 +23,7 @@ main {
 .cart {
   display: flex;
   flex-direction: column;
-  background-color: transparent;
+  background-color: #fff;
   width: 90%;
   height: auto;
   padding-bottom: 1rem;
@@ -33,6 +32,8 @@ main {
   text-align: center;
   gap: .75rem;
   overflow-y: hidden;
+  border: #000 2px solid;
+  margin-top: 0;
 }
 
 .buttons-container {
@@ -57,13 +58,18 @@ main {
 .cart-item {
   margin: 0 auto;
   width: 50%;
-  border: 2px solid darkblue;
+  border: 2px solid #242e7a;
   border-radius: 2rem;
   gap: 1rem;
   font-size: small;
-  background-color: #242e7a;
-  color: #a6f41d;
+  background-color: #fff;
+  color: #242e7a;
+  
 }
+.cart-item .card {
+  box-shadow: 0 7px 10 #000 !important;
+}
+
 /* .cart-item p {
   color: 
   #a6f41d;
@@ -72,12 +78,20 @@ main {
 .cart-item img {
   width: 3rem;
   height: 3rem;
-  border-radius: 1rem;
+  border-radius: 10px;
+  border: #242e7a 3px solid;
 }
 
 .cart-item button {
   /* border: 5px solid blue; */
-  border-radius: 10px;
-  background-color: #a6f41d;
+  border-radius: 50%;
+  background-color: #fff;
   color: #242e7a;
+  padding: 3px;
+  height: 25px;
+  width: 25px;
+  border: 2px solid #242e7a;
+}
+.delete-item {
+  color: #87e6e0!important;
 }

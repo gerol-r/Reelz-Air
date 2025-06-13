@@ -159,11 +159,14 @@ def add_to_cart(request):
                 }, status=404)
             
             # Create cart item with product
-            CartItem.objects.create(
+            cart_item, created = CartItem.objects.get_or_create(
                 cart=cart,
                 product=product,
-                quantity=1
+                defaults={'quantity': 1}
             )
+            if not created:
+                cart_item.quantity += 1
+                cart_item.save()
             
             return JsonResponse({'success': True})
             

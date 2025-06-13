@@ -77,10 +77,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'reelz_air',
-        'USER': 'postgres',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        # 'USER': 'postgres',
+        # 'PASSWORD': 'password',
+    #     'HOST': 'localhost',
+    #     'PORT': '5432',
     }
 }
 
