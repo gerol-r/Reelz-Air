@@ -44,54 +44,55 @@
 document.addEventListener("DOMContentLoaded", function () {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
-  document.querySelectorAll(".increase, .decrease").forEach((button) => {
-    button.addEventListener("click", function () {
-      const itemId = this.dataset.id;
-      const action = this.classList.contains("increase") ? "increase" : "decrease";
+    document.querySelectorAll(".increase, .decrease").forEach((button) => {
+        button.addEventListener("click", function () {
+            const itemId = this.dataset.id;
+            const action = this.classList.contains("increase") ? "increase" : "decrease";
 
-      fetch(`/cart/item/${itemId}/update/`, {
-        method: "POST",
-        headers: {
-          "X-CSRFToken": csrfToken,
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams({ action }),
-      })
-      .then((response) => response.json())
-      .then((data) => {
-        this.parentElement.querySelector(".quantity").textContent = data.quantity;
-        this.parentElement.querySelector(".item-total").textContent = `$${data.item_total.toFixed(2)}`;
-        updateSubtotal();
-      });
+            fetch(`/cart/item/${itemId}/update/`, {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": csrfToken,
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: new URLSearchParams({ action }),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                this.parentElement.querySelector(".quantity").textContent = data.quantity;
+                this.parentElement.querySelector(".item-total").textContent = `$${data.item_total.toFixed(2)}`;
+                updateSubtotal();
+            });
+        });
     });
-  });
 
-  document.querySelectorAll(".delete-item").forEach((button) => {
-    button.addEventListener("click", function () {
-      const itemId = this.dataset.id;
-      fetch(`/cart/item/${itemId}/delete/`, {
-        method: "POST",
-        headers: {
-          "X-CSRFToken": csrfToken,
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.deleted) {
-          this.closest(".cart-item").remove();
-          updateSubtotal();
-        }
-      });
+    document.querySelectorAll(".delete-item").forEach((button) => {
+        button.addEventListener("click", function () {
+            const itemId = this.dataset.id;
+            fetch(`/cart/item/${itemId}/delete/`, {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": csrfToken,
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.deleted) {
+                    this.closest(".cart-item").remove();
+                    updateSubtotal();
+                }
+            });
+        });
     });
-  });
 
-  function updateSubtotal() {
-    let subtotal = 0;
-    document.querySelectorAll(".item-total").forEach((el) => {
-      subtotal += parseFloat(el.textContent.replace(/[^0-9.]/g, ""));
-    });
-    document.querySelector("#price h3").textContent = `$${subtotal.toFixed(2)}`;
-  }
+    function updateSubtotal() {
+        let subtotal = 0;
+        document.querySelectorAll(".item-total").forEach((el) => {
+            subtotal += parseFloat(el.textContent.replace(/[^0-9.]/g, ""));
+        });
+        document.querySelector("#price h3").textContent = `Subtotal: $${subtotal.toFixed(2)}`;
+    }
+});
 </script>
 {% endblock %}
