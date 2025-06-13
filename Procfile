@@ -1,1 +1,1 @@
-web: gunicorn reelzair.wsgi
+web: cd reelzair && gunicorn reelzair.wsgi
