@@ -16,7 +16,7 @@
       <img src="{% static 'images/shoppingcart/'|add:item.product.product|add:'.svg' %}" alt="{{ item.product.product }}">
       <h3>{{ item.product.product }}</h3>
       <p>Quantity: <span class="quantity">{{ item.quantity }}</span></p>
-      <p class="item-total">Total: ${{ item.item_total }}</p>
+      <p class="item-total" data-price="{{ item.product.price }}">$129.99</p>
 
       <button class="increase" data-id="{{ item.id }}"><i class="fas fa-plus"></i>  </button>
       <button class="decrease" data-id="{{ item.id }}"><i class="fas fa-minus"></i>  </button>
@@ -25,7 +25,7 @@
   {% endfor %}
 
   <div id="price">
-    <h3>Subtotal: ${{ total }}</h3>
+    <h3>Subtotal: ${{ total  }}</h3>
   </div>
 
   <div class="buttons-container">
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .then((response) => response.json())
             .then((data) => {
                 this.parentElement.querySelector(".quantity").textContent = data.quantity;
-                this.parentElement.querySelector(".item-total").textContent = `$${data.item_total.toFixed(2)}`;
+                {% comment %} this.parentElement.querySelector(".item-total").textContent = `$${data.item_total.toFixed(2)}`; {% endcomment %}
                 updateSubtotal();
             });
         });
@@ -87,12 +87,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function updateSubtotal() {
-        let subtotal = 0;
-        document.querySelectorAll(".item-total").forEach((el) => {
-            subtotal += parseFloat(el.textContent.replace(/[^0-9.]/g, ""));
-        });
-        document.querySelector("#price h3").textContent = `Subtotal: $${subtotal.toFixed(2)}`;
-    }
+    let subtotal = 0;
+
+    document.querySelectorAll(".cart-item").forEach((item) => {
+        const quantity = parseInt(item.querySelector(".quantity").textContent);
+        const unitPrice = parseFloat(item.querySelector(".item-total").dataset.price);
+        subtotal += unitPrice * quantity;
+    });
+
+    document.querySelector("#price h3").textContent = `Subtotal: $${subtotal.toFixed(2)}`;
+}
 });
 </script>
 {% endblock %}
