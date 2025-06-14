@@ -12,11 +12,11 @@ Reelzair is a sleek and responsive mobile web app that helps users browse, compa
 📦 Order Tracking – View current orders and delivery status (optional future feature). --Stretch
 
 📸 Screenshots
-![Screenshot #1](main_app/static/images/Screenshot1.png)
-![Screenshot #2](main_app/static/images/Screenshot2.png)
-![Screenshot #3](main_app/static/images/Screenshot3.png)
-![Screenshot #4](main_app/static/images/Screenshot4.png)
-![Screenshot #5](main_app/static/images/Screenshot5.png)
+![Screenshot #1](reelzair/main_app/static/images/Screenshot1.png)
+![Screenshot #2](reelzair/main_app/static/images/Screenshot2.png)
+![Screenshot #3](reelzair/main_app/static/images/Screenshot3.png)
+![Screenshot #4](reelzair/main_app/static/images/Screenshot4.png)
+![Screenshot #5](reelzair/main_app/static/images/Screenshot5.png)
 
 
 🛠️ Built With
