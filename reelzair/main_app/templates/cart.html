@@ -1,102 +1,115 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block head %}
+{% extends 'base.html' %} {% load static %} {% block head %}
 <link rel="stylesheet" href="{% static 'css/cart.css' %}" />
-<meta name="csrf-token" content="{{ csrf_token }}">
-{% endblock %}
-
-{% block content %}
+<meta name="csrf-token" content="{{ csrf_token }}" />
+{% endblock %} {% block content %}
 <section class="cart">
-<h1 class="carttitle">Your ReelzAir Cart</h1>
+  <h1 class="carttitle">Your ReelzAir Cart</h1>
 
-{% if items %}
-  {% for item in items %}
-    <div class="cart-item card">
-      <img src="{% static 'images/shoppingcart/'|add:item.product.product|add:'.svg' %}" alt="{{ item.product.product }}">
-      <h3>{{ item.product.product }}</h3>
-      <p>Quantity: <span class="quantity">{{ item.quantity }}</span></p>
-      <p class="item-total" data-price="{{ item.product.price }}">$129.99</p>
+  {% if items %} {% for item in items %}
+  <div class="cart-item card">
+    <img
+      src="{% static 'images/shoppingcart/'|add:item.product.product|add:'.svg' %}"
+      alt="{{ item.product.product }}"
+    />
+    <h3>{{ item.product.product }}</h3>
+    <p>Quantity: <span class="quantity">{{ item.quantity }}</span></p>
+    <p class="item-total" data-price="{{ item.product.price }}">$129.99</p>
 
-      <button class="increase" data-id="{{ item.id }}"><i class="fas fa-plus"></i>  </button>
-      <button class="decrease" data-id="{{ item.id }}"><i class="fas fa-minus"></i>  </button>
-      <button class="delete-item" data-id="{{ item.id }}"><i class="fas fa-trash"></i> </button>
-    </div>
+    <button class="increase" data-id="{{ item.id }}">
+      <i class="fas fa-plus"></i>
+    </button>
+    <button class="decrease" data-id="{{ item.id }}">
+      <i class="fas fa-minus"></i>
+    </button>
+    <button class="delete-item" data-id="{{ item.id }}">
+      <i class="fas fa-trash"></i>
+    </button>
+  </div>
   {% endfor %}
 
   <div id="price">
-    <h3>Subtotal: ${{ total  }}</h3>
+    <h3>Subtotal: ${{ total }}</h3>
   </div>
 
   <div class="buttons-container">
     <a href="{% url 'checkout' %}" class="cta-button">Proceed to Checkout</a>
     <a href="{% url 'home' %}" class="cta-button2">Continue Shopping</a>
   </div>
-  
+
   {% else %}
   <p>Your cart is empty.</p>
-{% endif %}
+  {% endif %}
 </section>
-{% endblock %}
-
-{% block extra_js %}
+{% endblock %} {% block extra_js %}
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+  document.addEventListener("DOMContentLoaded", function () {
+      const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
-    document.querySelectorAll(".increase, .decrease").forEach((button) => {
-        button.addEventListener("click", function () {
-            const itemId = this.dataset.id;
-            const action = this.classList.contains("increase") ? "increase" : "decrease";
+      document.querySelectorAll(".increase, .decrease").forEach((button) => {
+          button.addEventListener("click", function () {
+              const itemId = this.dataset.id;
+              const action = this.classList.contains("increase") ? "increase" : "decrease";
 
-            fetch(`/cart/item/${itemId}/update/`, {
-                method: "POST",
-                headers: {
-                    "X-CSRFToken": csrfToken,
-                    "Content-Type": "application/x-www-form-urlencoded",
-                },
-                body: new URLSearchParams({ action }),
-            })
-            .then((response) => response.json())
-            .then((data) => {
-                this.parentElement.querySelector(".quantity").textContent = data.quantity;
-                {% comment %} this.parentElement.querySelector(".item-total").textContent = `$${data.item_total.toFixed(2)}`; {% endcomment %}
-                updateSubtotal();
-            });
-        });
-    });
+              fetch(`/cart/item/${itemId}/update/`, {
+                  method: "POST",
+                  headers: {
+                      "X-CSRFToken": csrfToken,
+                      "Content-Type": "application/x-www-form-urlencoded",
+                  },
+                  body: new URLSearchParams({ action }),
+              })
+              .then((response) => response.json())
+              .then((data) => {
+                  this.parentElement.querySelector(".quantity").textContent = data.quantity;
+                  {% comment %} this.parentElement.querySelector(".item-total").textContent = `$${data.item_total.toFixed(2)}`; {% endcomment %}
+                  updateSubtotal();
+              });
+          });
+      });
 
-    document.querySelectorAll(".delete-item").forEach((button) => {
-        button.addEventListener("click", function () {
-            const itemId = this.dataset.id;
-            fetch(`/cart/item/${itemId}/delete/`, {
-                method: "POST",
-                headers: {
-                    "X-CSRFToken": csrfToken,
-                    "Content-Type": "application/x-www-form-urlencoded",
-                },
-            })
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.deleted) {
-                    this.closest(".cart-item").remove();
-                    updateSubtotal();
+      document.querySelectorAll(".delete-item").forEach((button) => {
+          button.addEventListener("click", function () {
+              const itemId = this.dataset.id;
+              fetch(`/cart/item/${itemId}/delete/`, {
+                  method: "POST",
+                  headers: {
+                      "X-CSRFToken": csrfToken,
+                      "Content-Type": "application/x-www-form-urlencoded",
+                  },
+              })
+              .then((response) => response.json())
+              .then((data) => {
+                  if (data.deleted) {
+                      this.closest(".cart-item").remove();
+                      updateSubtotal();
+
+                      if (document.querySelectorAll(".cart-item").length === 0) {
+                        const subtotalDiv = document.querySelector("#price");
+                        const buttonsContainer = document.querySelector(".buttons-container");
+                        if (subtotalDiv) subtotalDiv.remove();
+                        if (buttonsContainer) buttonsContainer.remove();
+
+                        const cartSection = document.querySelector(".cart");
+                        const emptyMessage = document.createElement("p");
+                        emptyMessage.textContent = "Your cart is empty.";
+                        cartSection.appendChild(emptyMessage);
+                  }
                 }
-            });
-        });
-    });
+              });
+          });
+      });
 
-    function updateSubtotal() {
-    let subtotal = 0;
+      function updateSubtotal() {
+      let subtotal = 0;
 
-    document.querySelectorAll(".cart-item").forEach((item) => {
-        const quantity = parseInt(item.querySelector(".quantity").textContent);
-        const unitPrice = parseFloat(item.querySelector(".item-total").dataset.price);
-        subtotal += unitPrice * quantity;
-    });
+      document.querySelectorAll(".cart-item").forEach((item) => {
+          const quantity = parseInt(item.querySelector(".quantity").textContent);
+          const unitPrice = parseFloat(item.querySelector(".item-total").dataset.price);
+          subtotal += unitPrice * quantity;
+      });
 
-    document.querySelector("#price h3").textContent = `Subtotal: $${subtotal.toFixed(2)}`;
-}
-});
+      document.querySelector("#price h3").textContent = `Subtotal: $${subtotal.toFixed(2)}`;
+  }
+  });
 </script>
 {% endblock %}
